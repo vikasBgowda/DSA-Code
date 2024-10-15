@@ -1,0 +1,29 @@
+Getting the maximum score after applying K operations and replace it with arr[max] / 3 to ceiling value
+2530 - leetcode
+
+1. Find the Max element in a array 
+2. Add the Max Element to the score variable
+3. now divide the number by 3 and replace the current max number to the ceiling value of the divide number
+4. Now repeat the function till k - times
+
+* we take help of heap sort which is used the store the value in the sorted formate
+
+class Solution {
+    public long maxKelements(int[] nums, int k) {
+        PriorityQueue<Integer>pq=new PriorityQueue<>(Comparator.reverseOrder());
+        for(int n:nums){
+            pq.offer(n);
+        }
+
+        long score=0;
+        while(k>0){
+            int maxValue=pq.poll();
+            score+=maxValue;
+            pq.offer((int)(Math.ceil(maxValue/3.0)));
+            k--;
+        }
+
+        return score;
+
+    }
+}
