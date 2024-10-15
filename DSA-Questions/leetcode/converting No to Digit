@@ -1,1 +1,3 @@
+for converting the Number to the digit formate we use " Math.log10() "
+
 int x=Math.log10(num)
