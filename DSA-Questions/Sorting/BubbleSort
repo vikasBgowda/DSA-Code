@@ -1,0 +1,30 @@
+Bubble Sort
+1. In the every iteration we try to swap the numbers and try to get the maximun value at the end of the array
+2. we try to check if 
+                  current element > current element +  1;
+                  then we swap.
+Note:
+- In first iteration we go till the last element of the array and place the largest element in that array at last
+- In second iteration we go till the last second element of the array and place the secound largest element in the length-1 postion
+
+so i (0-n)
+   j -> (0  to < n-i) or (o to <=n-i+1)
+
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        // System.out.println("Try programiz.pro");
+        int arr[]={5,4,3,2,1};
+        int n=arr.length-1;
+        for(int i=0;i<n;i++){
+            for(int j =0;j<n-i;j++){
+                if(arr[j]>arr[j+1]){
+                    int temp=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=temp;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+}
