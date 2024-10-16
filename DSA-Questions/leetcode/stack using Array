@@ -1,0 +1,73 @@
+
+1. stack implementation using Array
+2. We use top variable to achive the stack operation from array
+3. Main methods are 
+  push-move top and add in array
+  pop -decrease the top variable pointing to the array 
+  size - top element value will give the size of the stack
+
+we are not removing the elements from the array when we use the pop method we just manuplate the array elements by overrideing with the existing value
+
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        
+        stackMethod();
+    }
+    // get the size of the stack and create a array of given size
+    // use top element for the implementation of the stack
+    static void stackMethod(){
+        Scanner input=new Scanner(System.in);
+        System.out.println("Enter the size of the stack ");
+        int n=input.nextInt();
+        
+        int st[]=new int[n];
+        int top=-1;
+        while(true){
+            System.out.println(" Choose the following Options ");
+            System.out.println("1 - PUSH ");
+            System.out.println("2 - POP ");
+            System.out.println("3 - SIZE ");
+            System.out.println("4 - EXIT");
+            int choose=input.nextInt();
+            switch(choose){
+                case 1:{
+                    if(st.length==top){
+                        System.out.println("Stack is full ");
+                        return;
+                    }else{
+                        System.out.println("Enter the value to be inserted inside the stack ");
+                        int value=input.nextInt();
+                        top++;
+                        st[top]=value;
+                        System.out.println("The value is inserted inside the stack successfully ");
+                    }
+                }
+                break;
+                case 2:{
+                    if(top==-1){
+                        System.out.println("Stack is empty no element to be removed ");
+                    }else{
+                        int x=st[top];
+                        top--;
+                        System.out.println(x+" is removed from the stack ");
+                    }
+                }
+                break;
+                case 3:{
+                    if(top==-1){
+                        System.out.println("The stack is empty");
+                    }
+                    else{
+                        System.out.println("Size of stack is "+top);
+                    }
+                }
+                break;
+                case 4: System.out.println("exiting from the stack ");
+                    return ;
+
+            }
+        }
+        
+    }
+}
