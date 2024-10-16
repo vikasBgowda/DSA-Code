@@ -1,0 +1,58 @@
+// merge sort array 
+- we use divide and merge method to sort the array
+
+1. we divide the array and call the merge fuction till we get the indicual/ single element
+2. now after getting the single element we add the element in the sorted formate
+3. now we need to merge the both sorted array into the single array using merge two sorted array methods.
+
+
+
+
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        // System.out.println("Try programiz.pro");
+        int arr[]={5,4,3,2,1,7,8,9};
+        int n=arr.length-1;
+        
+        int res[]=mergeSort(arr);
+        System.out.println(Arrays.toString(res));
+    }
+    static int[] mergeSort(int arr[]){
+        if(arr.length==1){
+            return arr;
+        }
+       
+        int mid=arr.length/2;
+        
+        int left[]=mergeSort(Arrays.copyOfRange(arr,0,mid));
+        int right[]=mergeSort(Arrays.copyOfRange(arr,mid,arr.length));
+        
+        return mergeBoth(left,right);
+    }
+    static int[] mergeBoth(int first[],int second[]){
+        int i=0,j=0,k=0,n=first.length,m=second.length;
+        int arr[]=new int[n+m];
+        while(i<n && j<m){
+            if(first[i]<second[j]){
+                arr[k]=first[i];
+                i++;
+            }else{
+                arr[k]=second[j];
+                j++;
+            }
+            k++;
+        }
+        while(i<n){
+            arr[k]=first[i];
+            i++;
+            k++;
+        }
+        while(j<m){
+            arr[k]=second[j];
+            j++;
+            k++;
+        }
+        return arr;
+    }
+}
