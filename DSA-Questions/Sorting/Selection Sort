@@ -1,0 +1,33 @@
+Selection Sort
+- In Selection sort for every one whole iteration we take a max value (index) and at the end of each iteration we swap it with last element
+- we select the maximun element in the array for that iteraation and swap it with at the last of the element.
+- No. of swap is the size of the array or No. of swap is number of iterations.
+
+Note
+- We don't swap do multiple swaps on each iteration we just swap once for each iteration.
+- Difference between bubble and selection sort is 
+  * In Selection sort swapping takes place once for each iteration, where as in Bubble sort we do multiple swaps and comparing for each iterations
+
+
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        // System.out.println("Try programiz.pro");
+        int arr[]={5,4,3,2,1};
+        int n=arr.length-1;
+        for(int i=n;i>=0;i--){
+            int index=0;
+            int max=Integer.MIN_VALUE;
+            for(int j=0;j<=i;j++){
+                if(arr[j]>max){
+                    index=j;
+                    max=arr[j];
+                }
+            }
+            int temp=arr[index];
+            arr[index]=arr[i];
+            arr[i]=temp;
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+}
