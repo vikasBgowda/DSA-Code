@@ -1,0 +1,34 @@
+
+Input: nums1 = [4,1,2], nums2 = [1,3,4,2]
+Output: [-1,3,-1]
+
+-In this method we use 2 loops
+- Keep flag variable to keep the track if arr1[i] == arr2[j]
+- then in the next condition if ( flag==true && arr[j]>arr[i])
+-  res[index++]=arr[j];
+ 
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int n=nums1.length;
+        int m=nums2.length;
+        int res[]=new int[n];
+        Arrays.fill(res,-1);
+        int index=0;
+        for(int i=0;i<n;i++){
+            boolean flag=false;
+            for(int j=0;j<m;j++){
+                if(nums1[i]==nums2[j]){
+                    flag=true;
+                }
+                else if(flag==true && nums2[j]>nums1[i]){
+                    res[index]=nums2[j];
+                    break;                    
+                }
+            }
+            index++;
+            
+        }
+        return res;
+    }
+}
