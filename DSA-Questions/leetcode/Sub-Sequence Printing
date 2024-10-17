@@ -1,0 +1,20 @@
+
+- Printing the values of all the sub-sequences.
+- Take one value for each method / Ignore(remove) value for another method
+
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        String str="ABC";
+        helper(str,"",0);
+    }
+    static void helper(String str,String ans,int index){
+        if(str.length()==index){
+            System.out.print(ans +" ");
+            return;
+        }
+        helper(str,ans+str.charAt(index),index+1);
+        helper(str,ans,index+1);
+    }
+    
+}
