@@ -1,0 +1,29 @@
+
+We are keeping two variables - currsum & sum
+condition - 
+if currsum<0 we make currsum=0 and start again from the next element
+and if(currsum>sum) => sum=currsum
+
+
+class Solution {
+
+    // arr: input array
+    // Function to find the sum of contiguous subarray with maximum sum.
+    int maxSubarraySum(int[] arr) {
+
+        // Your code here
+        int sum=Integer.MIN_VALUE;
+        int cursum=0;
+        for(int i=0;i<arr.length;i++){
+            cursum+=arr[i];
+            if(cursum>sum){
+                sum=cursum;
+            }
+            if(cursum<0){
+                cursum=0;
+            }
+            
+        }
+        return sum==Integer.MIN_VALUE?-1:sum;
+    }
+}
