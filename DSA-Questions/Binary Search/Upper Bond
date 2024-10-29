@@ -1,0 +1,19 @@
+// Here we check if arr[mid]>X then we move to left and see if we can find any element less then keeping the track of arr[mid]
+
+public static int upperBound(int []arr, int x, int n){
+        // Write your code here.
+        int start=0,end=n-1;
+        int ans=n;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            
+            //If arr[mid] is less then X then we should search right side to find the largest element which is less then X
+            if(arr[mid]>x){
+                ans=mid;
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        return ans;
+    }
