@@ -1,0 +1,32 @@
+
+// we check and see of the mid element 
+  -  if arr[mid]<=X if it is less then or equal to X then we move right side to find the largest value which is less than X
+      we store ans=mid & move start=mid+1  
+  - else we move to left end=mid-1
+
+class HelloWorld {
+    public static void main(String[] args) {
+        
+        long arr[]={1,2,8,10,11,12,19};
+        int n=arr.length;
+        long x=9;
+        System.out.println(FindAnswer(arr,n,x));
+        
+    }
+    static int FindAnswer(long arr[],int n,long x){
+        int start=0,end=n-1;
+        int ans=n;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            
+            //If arr[mid] is less then X then we should search right side to find the largest element which is less then X
+            if(arr[mid]<=x){
+                ans=mid;
+                start=mid+1;
+            }else{
+                end=mid-1;
+            }
+        }
+        return ans;
+    }
+}
