@@ -1,0 +1,23 @@
+// It is similar to floor problem we need to insert the value
+
+class Solution {
+    public int searchInsert(int[] arr, int x) {
+        int n=arr.length;
+        int start=0,end=n-1;
+        int ans=n;
+
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(arr[mid]==x){
+                return mid;
+            }
+            else if(arr[mid]<x){
+                ans=mid;
+                start=mid+1;
+            }else{
+                end=mid-1;
+            }
+        }
+        return start;
+    }
+}
