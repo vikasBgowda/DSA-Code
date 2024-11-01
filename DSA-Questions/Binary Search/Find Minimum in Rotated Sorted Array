@@ -1,0 +1,25 @@
+//similar to roated sorted array
+// 1 we check which part is sorted
+- once we get the sorted part then we find the smallest element in that part and move to the next part
+- if left part is sorted then min = start || for right part min = mid
+
+public class Solution {
+    public static int findMin(int []arr) {
+        // Write your code here.
+        int n=arr.length;
+        int start=0,end=n-1;
+        int ans=Integer.MAX_VALUE;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+
+            if(arr[start]<=arr[mid]){
+                ans=Math.min(ans,arr[start]);
+                start=mid+1;
+            }else{
+                ans=Math.min(ans,arr[mid]);
+                end=mid-1;
+            }
+        }
+        return ans;
+    }
+}
