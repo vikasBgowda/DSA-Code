@@ -1,0 +1,51 @@
+// we use both lower bound and upper bound for this problem
+// condition is in first postion if value = N (end of the array) or first element is not the given value then we send {-1,-1}
+
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static int FirstOne(ArrayList<Integer>arr , int n ,int k){
+        int start=0,end=n-1;
+        int ans=n;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(arr.get(mid)>=k){
+                ans=mid;
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        return ans;
+    }
+
+    public static int LastOne(ArrayList<Integer>arr, int n ,int k){
+        int start=0,end=n-1,ans=n;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+
+            if(arr.get(mid)>k){
+                ans=mid;
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        return ans;
+    }
+
+    public static int[] firstAndLastPosition(ArrayList<Integer> arr, int n, int k) {
+        // Write your code here.
+        int First = FirstOne(arr, n, k);
+
+        if(First == n || arr.get(First)!=k){
+            int res[]={-1,-1};
+            return res;
+        }
+        int Last=LastOne(arr, n, k);
+        int res[]={First,Last-1};
+        return res;
+    }
+
+};
