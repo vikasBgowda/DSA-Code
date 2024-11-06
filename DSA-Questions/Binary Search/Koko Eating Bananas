@@ -1,0 +1,40 @@
+// here we should identity the rnage between to do binary search => from 1 to Max of Array
+// we need to create function which gives us the sum of ceil value of array eleemnts after dividing with mid
+// we check if ans<=hour then we move to left = end=>mid-1 to find the min element
+// else if ans>hour then we move to right - start=>mid+1
+
+import java.util.*;
+public class Solution {
+    public static int minimumRateToEatBananas(int []v, int h) {
+        // Write Your Code Here
+        Arrays.sort(v);
+        int n=v.length;
+        int max=v[n-1];
+        int ans=0, res=0;
+        int start=1,end=max;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            ans=helper(v,n,mid);
+            if(ans<=h){
+                res=mid;
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        return start;      
+    }
+    static int helper(int arr[],int n,int k){
+        int sum=0;
+        for(int i=0;i<n;i++){
+            double x=(double)arr[i];
+            double y=(double)k;
+            sum+=Math.ceil(x/y);
+        }
+        // System.out.println("Sum = "+sum);
+        return sum;
+    }
+}
+
+
+
