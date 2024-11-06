@@ -1,0 +1,59 @@
+
+// 1- Apart from Two pointer apporch we can use ans=counter/times here we will get the number of batches we can make it
+// 2- In this problem edge case = rose * bookie > arr.length then => -1 we can't make the require batch
+// 3 - for bs range - start-> min(arr), end->max(arr)
+
+public class Solution {
+
+    // Function to check if we could make the possible bookue 
+    static boolean check(int arr[],int day,int m,int r){
+        int count=0,ans=0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]<=day){
+                count++;
+            }
+            else{
+                ans+=count/r;
+                count=0;
+            }
+        }
+        ans+=count/r;
+        if(ans>=m){
+            return true;
+        }
+         return false;
+    }
+
+    // Function to get Min and max Value
+    static int[] MaxMin(int arr[],int n){
+        int min=Integer.MAX_VALUE,max=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            min=Math.min(min,arr[i]);
+            max=Math.max(max,arr[i]);
+        }
+        int res[]={min,max};
+        return res;
+    }
+    public static int roseGarden(int[] arr, int r, int b) {
+        // Write your code here.
+        int n=arr.length;
+        if((r*b)>n) return -1;
+        boolean flag=false;
+
+        // Get min and max value
+        int MinMaxArr[]=MaxMin(arr, n);
+        int start=MinMaxArr[0],end=MinMaxArr[1];
+
+        //Binary search
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            flag=check(arr, mid, b, r);
+            if(flag==true){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        return start;
+    }
+}
