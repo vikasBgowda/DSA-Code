@@ -1,0 +1,49 @@
+// we create 2 functions 1.To find the max and sum of array
+                         2. To find the no of days it takes according to the given weights
+// now we do normal Binary Search and check for the weight of mid how manys it takes to ship
+// if (days<=RequiredDay) end=mid-1 else start=mid+1
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    static int[] FindMaxAndSum(int arr[],int n){
+        int sum=0, max=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            max=Math.max(max,arr[i]);
+        }
+        int res[]={max,sum};
+        return res;
+    }
+
+    static int FindDays(int arr[],int n,int weight){
+        int TotalDays=1;
+        int currweight=0;
+        for(int i=0;i<n;i++){
+            if(currweight+arr[i]>weight){
+                TotalDays+=1;
+                currweight=arr[i];
+            }else{
+                currweight+=arr[i];
+            }
+        }
+        return TotalDays;
+    }
+    public static int leastWeightCapacity(int[] weights, int d) {
+        // Write your code here.
+        int n=weights.length;
+        int arr[]=FindMaxAndSum(weights, n);
+        int start=arr[0] , end=arr[1];
+
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            int currDays=FindDays(weights,n,mid);
+            if(currDays <= d){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        return start;
+    }
+}
