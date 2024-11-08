@@ -1,0 +1,31 @@
+// 1539. Kth Missing Positive Number
+
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        int n=arr.length;
+        int start=0,end=n-1;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            int missing=arr[mid]-(mid+1);
+            if(missing<k){
+                start=mid+1;               
+            }else{
+                end=mid-1;
+            }
+        }
+        return end+k+1; 
+        // or start+k
+    }
+}
+
+        /**
+        how to find this formula (k+high+1)
+        
+        answer = arr[high] + more
+               = arr[high] + k - missing
+               = arr[high] + k - (arr[high] - high-1)
+               = arr[high] + k - arr[high] + high + 1;
+
+        answer = k + high + 1
+         */
+
