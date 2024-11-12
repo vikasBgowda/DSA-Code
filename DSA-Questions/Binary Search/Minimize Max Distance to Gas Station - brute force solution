@@ -1,0 +1,32 @@
+import java.util.ArrayList;
+import java.util.*;
+public class Solution {
+    public static double MinimiseMaxDistance(int []arr, int K){
+        // Write your code here.
+        int n=arr.length;
+        // ArrayList<Integer>list=new ArrayList<>(n-1);
+        int list[]=new int[n-1];
+        // Collections.fill(list,0);
+        for(int gas=1;gas<=K;gas++){
+            int maxIndex=-1;
+            double MaxSubLength=-1;
+            for(int i=0;i<n-1;i++){
+                double diff=arr[i+1]-arr[i];
+                double sublength=(double)diff/(double)(list[i]+1);
+                if(sublength>MaxSubLength){
+                    MaxSubLength=sublength;
+                    maxIndex=i;
+                }
+            }
+            // list.set(maxIndex,list.get(maxIndex)+1);
+            list[maxIndex]=list[maxIndex]+1;
+        }
+        double value=-1;
+        for(int i=0;i<n-1;i++){
+            double diff=arr[i+1]-arr[i];
+            double secLength=(double)diff/(double)(list[i]+1);
+            value=Math.max(value,secLength);
+        }
+        return value;
+    }
+}
