@@ -1,0 +1,56 @@
+
+// it is similar to merge two sorted array method but we can or not store it in a new array
+// we are just playing with pointer to find that middle element without using any extra space
+// size==even ==> (mid+mid)/2
+// size == odd ==> mid
+
+
+class Solution {
+    public double FindAns(int arr1[],int arr2[]){
+        int n=arr1.length;
+        int m=arr2.length;
+        int totalLength=n+m;
+
+        int mid=totalLength/2;
+
+        int first=mid,second=mid-1;
+        double val1=-1,val2=-1;
+        int i=0,j=0,k=0;
+        while(i<n && j<m){
+            if(arr1[i]<arr2[j]){
+                if(first==k) val1=(double)arr1[i];
+                if(second==k) val2=(double)arr1[i];
+                i++;
+                k++; 
+            }else{
+                if(first==k) val1=(double)arr2[j];
+                if(second==k) val2=(double)arr2[j];
+                j++;
+                k++; 
+            }
+        }
+        while(i<n){
+            if(first==k) val1=(double)arr1[i];
+            if(second==k) val2=(double)arr1[i];
+                i++;
+                k++; 
+        }
+        while(j<m){
+            if(first==k) val1=(double)arr2[j];
+            if(second==k) val2=(double)arr2[j];
+                j++;
+                k++; 
+        }
+        if(totalLength%2==0){
+
+            return (double) ((val1+val2)/(double)2);
+        }
+        else{
+
+            return (double) val1;
+        }
+    }
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        return FindAns(nums1,nums2);
+    }
+}
