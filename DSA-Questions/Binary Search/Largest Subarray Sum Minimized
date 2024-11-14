@@ -1,0 +1,45 @@
+
+// here we find the range i.e start=max of array & end=sum of array
+k range is start - low (N length of array - 1)
+so according we move the mid element
+
+public class Solution {
+
+    static int findKvalue(int arr[],int n,int value){
+        int count=1,sum=0;
+        for(int i=0;i<n;i++){
+            if(sum+arr[i]>value){
+                count+=1;
+                sum=arr[i];
+            }else{
+                sum+=arr[i];
+            }
+        }
+        return count;
+        
+    }
+    public static int largestSubarraySumMinimized(int []a, int k) {
+        // Write Your Code Here
+        int low=Integer.MIN_VALUE;
+        int high=0;
+        int n=a.length;
+        for(int i=0;i<n;i++){
+            low=Math.max(low,a[i]);
+            high+=a[i];
+        }
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            int currValueOfK=findKvalue(a,n,mid);
+            if(currValueOfK>k){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return low;
+
+    }
+}
+
+
+
