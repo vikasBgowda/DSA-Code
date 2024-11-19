@@ -1,32 +1,43 @@
-import java.util.ArrayList;
-import java.util.*;
+//Here we use an extra array - placeArr to find how many elments are placed in that section 
+// 1 . we take diff of each iteration = > i+1 - i
+// 2 . we take the maxLength in that section => diff / 1 + placeArr
+// 3 . For every Iteration we find the maximun length and store the index
+// 4 . We add that maxIndex in placeArr by increament +1 => placeArr[maxIndex]++ // placeArr[maxIndex]=placeArray[MaxIndex]+1
+
+// At last we again run a loop from i--n-1 and again check the diff , length and store the maximun length
+// return the maximum length
+
+// We should use an extra Array for storing how many elements are stored in that section for the placing element and minize the size
+
+
+
 public class Solution {
     public static double MinimiseMaxDistance(int []arr, int K){
         // Write your code here.
         int n=arr.length;
-        // ArrayList<Integer>list=new ArrayList<>(n-1);
-        int list[]=new int[n-1];
-        // Collections.fill(list,0);
-        for(int gas=1;gas<=K;gas++){
-            int maxIndex=-1;
-            double MaxSubLength=-1;
-            for(int i=0;i<n-1;i++){
-                double diff=arr[i+1]-arr[i];
-                double sublength=(double)diff/(double)(list[i]+1);
-                if(sublength>MaxSubLength){
-                    MaxSubLength=sublength;
-                    maxIndex=i;
+        int placeArr[]=new int[n-1];
+        for(int i=0;i<K;i++){
+            int MaxIndex=-1;
+            double MaxLength=-1;
+            for(int j=0;j<n-1;j++){
+                
+                int diff=arr[j+1]-arr[j];
+                double Length=(double)diff/(double)(1+placeArr[j]);
+                if(Length>MaxLength){
+                    MaxIndex=j;
+                    MaxLength=Length;
                 }
+
             }
-            // list.set(maxIndex,list.get(maxIndex)+1);
-            list[maxIndex]=list[maxIndex]+1;
+            placeArr[MaxIndex]++;
         }
-        double value=-1;
+        double Res=-1;
         for(int i=0;i<n-1;i++){
-            double diff=arr[i+1]-arr[i];
-            double secLength=(double)diff/(double)(list[i]+1);
-            value=Math.max(value,secLength);
+            int diff=arr[i+1]-arr[i];
+            
+            double currLength=(double)diff/(double)(1+placeArr[i]);
+            Res=Math.max(Res,currLength);
         }
-        return value;
+        return Res;
     }
 }
