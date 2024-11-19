@@ -1,0 +1,46 @@
+// we use range and find the k value 
+// range => [0,MaxDistance(arr)]
+
+//In finding K we should check for (arr[i] - arr[i - 1]) == (dist * numberInBetween) 
+i.e 1/0.5==2 which is not true since we can't put two elements between 1 - 2 with distance 0.5
+so if 1/0.5==2 then => 1 == 2 * 0.5 then we will remove 1 from the answer
+
+NoOfK>K so we need to forward right => low=mid
+else if NoOfK<K so we need to lower the number size => high=mid
+
+public class Solution {
+
+        public static int FindK(int arr[],double dist){
+        int n = arr.length; // size of the array
+        int cnt = 0;
+        for (int i = 1; i < n; i++) {
+            int numberInBetween = (int)((arr[i] - arr[i - 1]) / dist);
+            if ((arr[i] - arr[i - 1]) == (dist * numberInBetween)) {
+                numberInBetween--;
+            }
+            cnt += numberInBetween;
+        }
+        return cnt;
+    }
+
+        public static double MinimiseMaxDistance(int []arr, int K){
+        // Write your code here.
+        double low=0,high=0;
+        for(int i=0;i<arr.length-1;i++){
+            high = Math.max(high, (double)(arr[i + 1] - arr[i]));
+        }
+        double range=1e-6;
+        while(high-low>range){
+            double mid=(low+high)/2.0;
+            int NoofK=FindK(arr,mid);
+
+            if(NoofK>K){
+                low=mid;
+            }else{
+                high=mid;
+            }
+        }
+
+        return high;
+    }
+}
