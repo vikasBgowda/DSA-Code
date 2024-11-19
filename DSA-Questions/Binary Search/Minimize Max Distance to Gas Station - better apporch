@@ -1,0 +1,37 @@
+// we are convert the T.C from (n*k) + n to ==> nlogn + klogk
+// we use Priority Queue to reduce additional O(N) in Time Complexity by using the sorted property of PQ
+
+import java.util.PriorityQueue;
+
+public class Solution {
+    
+    public static class Pair{
+        double length;
+        int index;
+        Pair(double length,int index){
+            this.length=length;
+            this.index=index;
+        }
+    }
+    public static double MinimiseMaxDistance(int []arr, int K){
+        // Write your code here.
+        
+        int n=arr.length;
+        int placeArr[]=new int[n-1];
+        PriorityQueue<Pair>pq=new PriorityQueue<>((a, b) -> Double.compare(b.length, a.length));
+        for(int i=0;i<n-1;i++){
+            pq.add(new Pair((arr[i+1]-arr[i]),i));
+        }
+
+        for(int i=0;i<K;i++){
+            Pair Curr=pq.poll();
+            int index=Curr.index;
+            placeArr[index]++;
+            int IntialDiff=arr[index+1]-arr[index];
+            double currLength=(double)(IntialDiff)/(double)(1+placeArr[index]);
+            pq.add(new Pair(currLength,index));
+        }
+
+        return pq.peek().length;
+    }
+}
