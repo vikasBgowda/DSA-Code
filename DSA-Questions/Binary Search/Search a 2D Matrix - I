@@ -1,0 +1,32 @@
+// Here we are searching an element in 2D Matrix where each row is sorted
+// so we use the sroted method and try to impletement binary search on induvial rows
+// before trying binary search on row we check if target element lies on that range
+so time complixity is O(N) + O(Log(M)) since just 1 time we are running binary search 
+
+class Solution {
+    static boolean SearchNumber(int arr[],int n,int k){
+        int start=0,end=n-1;
+        while(start<=end){
+            int mid=(start+end)>>1;
+            if(arr[mid]==k){
+                return true;
+            }
+            if(arr[mid]>k){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        return false;
+    }
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        for(int i=0;i<n;i++){
+            if(target>=matrix[i][0] && target<=matrix[i][m-1]){
+                return SearchNumber(matrix[i],m,target);
+            }
+        }
+        return false;
+    }
+}
