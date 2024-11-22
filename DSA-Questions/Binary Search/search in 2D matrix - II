@@ -1,0 +1,50 @@
+// here we are doing a normal binary in 2D matrix array
+// range => low = 0 and high = n*m-1
+// once we get mid we can't directly access the element in that index so we should convert the middle into row and coloum corrdinates
+// row => mid / No of col (m) since all the first element of the row starts with the mulitple of (m) Length of colouum
+// col coordinates => mid % No of col(m) since it gives distance between the starting element and current element like distance
+
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int low=0,high=n*m-1;
+
+        while(low<=high){
+            int mid=(low+high)>>1;
+            int row=mid/m;
+            int col=mid%m;
+            if(matrix[row][col]==target){
+                return true;
+            }
+            if(matrix[row][col]>target){
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        return false;
+    }
+}class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int low=0,high=n*m-1;
+
+        while(low<=high){
+            int mid=(low+high)>>1;
+            int row=mid/m;
+            int col=mid%m;
+            if(matrix[row][col]==target){
+                return true;
+            }
+            if(matrix[row][col]>target){
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        return false;
+    }
+}
