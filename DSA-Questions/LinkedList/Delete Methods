@@ -1,0 +1,99 @@
+
+// here we are able to do the following tasks
+- delete head
+- delete tail
+- delete at given postion
+- delete the given value
+
+
+class Main {
+    static class Node{
+        int data;
+        Node next;
+        Node(int data,Node next){
+            this.data=data;
+            this.next=next;
+        }
+    }
+    static Node CreateLL(int arr[]){
+        Node head=new Node(arr[0],null);
+        Node prev=head;
+        for(int i=1;i<arr.length;i++){
+            Node curr=new Node(arr[i],null);
+            prev.next=curr;
+            prev=curr;
+        }
+        return head;
+    }
+    static void PrintLL(Node head){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+    }
+    static Node DeleteHead(Node head){
+        if(head==null || head.next==null){
+            return null;
+        }
+        return head.next;
+    }
+    static Node DeleteTail(Node head){
+        if(head==null || head.next==null) return head;
+        Node temp=head;
+        while(temp.next.next!=null){
+            temp=temp.next;
+        }
+        temp.next=null;
+        return head;
+    }
+    static Node removeK(Node head,int k){
+        if(head==null) return head;
+        if(k==1){
+            return head.next;
+        }
+        Node temp=head;
+        int count=0;
+        Node prev=null;
+        while(temp!=null){
+            count++;
+            if(count==k){
+                prev.next=prev.next.next;
+                break;
+            }
+            prev=temp;
+            temp=temp.next;
+        }
+        return head;
+    }
+    static Node removeElement(Node head,int k){
+        if(head==null) return head;
+        if(head.data==k){
+            return head.next;
+        }
+        Node temp=head;
+        Node prev=null;
+        while(temp!=null){
+            if(temp.data==k){
+                prev.next=prev.next.next;
+                break;
+            }
+            prev=temp;
+            temp=temp.next;
+        }
+        return head;
+    }
+    public static void main(String[] args) {
+        // System.out.println("Try programiz.pro");
+        int arr[]={3,5,7,4,8};
+        Node head=CreateLL(arr);
+        PrintLL(head);
+        // head=removeK(null,10);
+        head=removeElement(head,8);
+        // Node Second=DeleteHead(head);
+        // Node Tailremove=DeleteTail(head);
+
+        System.out.println();
+        PrintLL(head);
+    }
+}
