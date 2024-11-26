@@ -1,0 +1,38 @@
+public static Node deleteNode(Node head, int k) {
+        // Write Your Code Here.
+        if(head==null || head.next==null){
+            return null;
+        }
+        Node curr=head;
+        int count=0;
+        
+        while(curr!=null){
+            count++;
+            if(count==k){
+                Node prevEle=curr.prev;
+                Node nextEle=curr.next;
+
+                if(prevEle==null){
+                    Node temp=head.next;
+                    head.next=null;
+                    temp.prev=null;
+                    head=temp;
+                    return head;
+                }else if(nextEle==null){
+                    prevEle.next=null;
+                    curr.prev=null;
+                    return head;
+                }
+                else{
+                    prevEle.next=curr.next;
+                    nextEle.prev=curr.prev;
+                    curr.prev=null;
+                    curr.next=null;
+                    return head;
+                }
+            }
+            curr=curr.next;
+        }
+        return null;
+        
+    }
