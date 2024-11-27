@@ -1,0 +1,36 @@
+// The Number are stored in reverse order and also we need to provide the result of addition in reverse order
+// so we move from left -> add both the elements and then store the % of sum (sum%10) and calculate the carry = > sum/10 
+// then for the next iteration we add the carry along with the sum
+// at last we will check if there is any carry so we add the remaining carry at the end of the iteration/LinkedList
+
+public class Solution {
+    static LinkedListNode addTwoNumbers(LinkedListNode head1, LinkedListNode head2) {
+        // Write your code here.
+        LinkedListNode temp1=head1;
+        LinkedListNode temp2=head2;
+        int carry=0;
+        LinkedListNode dummy=new LinkedListNode(-1);
+        LinkedListNode curr=dummy;
+        while(temp1!=null || temp2!=null){
+            int sum=0;
+            sum+=carry;
+            if(temp1!=null){
+                sum+=temp1.data;
+                temp1=temp1.next;
+            }
+            if(temp2!=null){
+                sum+=temp2.data;
+                temp2=temp2.next;
+            }
+            LinkedListNode NewNode=new LinkedListNode(sum%10);
+            carry=sum/10;
+            curr.next=NewNode;
+            curr=curr.next;
+        }
+        if(carry!=0){
+            LinkedListNode newNode=new LinkedListNode(carry);
+            curr.next=newNode;
+        }
+        return dummy.next;
+    }
+}
