@@ -1,0 +1,36 @@
+// here we are using array to store odd elements first and then the even elements next.
+// once we store the elements in array 
+// we will replace the curr.data to the value of array 
+// 1 2 3 4 5 arr = 1 3 5 2 4 (odd , even ) => now we will replace it with the given LL
+
+import java.util.*;
+public class Solution {
+    public static Node oddEvenList(Node head) {
+        // Write your code here.
+        ArrayList<Integer>list=new ArrayList<>();
+        Node curr=head;
+        while(curr!=null && curr.next!=null){
+            list.add(curr.data);
+            curr=curr.next.next;
+        }
+        if(curr!=null){
+            list.add(curr.data);
+        }
+        curr=head.next;
+        while(curr!=null && curr.next!=null){
+            list.add(curr.data);
+            curr=curr.next.next;
+        }
+        if(curr!=null){
+            list.add(curr.data);
+        }
+        curr=head;
+        int i=0;
+        while(curr!=null){
+            curr.data=list.get(i);
+            i++;
+            curr=curr.next;
+        }
+        return head;
+    }
+}
