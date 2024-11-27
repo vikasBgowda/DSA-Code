@@ -1,0 +1,29 @@
+public class Solution {
+    public static Node oddEvenList(Node head) {
+        // Write your code here.
+        Node OddEle=new Node(-1);
+        Node EvenEle=new Node(-1);
+        Node odd=OddEle;
+        Node even=EvenEle;
+        Node curr=head;
+        int index=0;
+        while(curr!=null){
+            index+=1;
+            if(index%2==0){
+                even.next=curr;
+                even=curr;
+                curr=curr.next;
+            }else{
+                odd.next=curr;
+                odd=curr;
+                curr=curr.next;
+            }
+        }
+        odd.next=EvenEle.next;
+        if(even!=null){
+            even.next=null;
+        }
+        // return EvenEle.next;
+        return OddEle.next;
+    }
+}
