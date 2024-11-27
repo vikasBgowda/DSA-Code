@@ -1,0 +1,25 @@
+// reverse a Double LL using the stack 
+// we add all the element into the stack and then we pop each element and add it into the linked List and do the required changes
+public class Solution
+{
+    public static Node reverseDLL(Node head)
+    {
+        // Write your code here.
+        Node curr=head;
+        Stack<Integer> st = new Stack<>();
+        while(curr!=null){
+            st.push(curr.data);
+            curr=curr.next;
+        }
+        Node dummy=new Node(-1);
+        curr=dummy;
+        while(!st.isEmpty()){
+            int data=st.pop();
+            Node newNode=new Node(data);
+            curr.next=newNode;
+            newNode.prev=curr;
+            curr=newNode;
+        }
+        return dummy.next;
+    }
+}
