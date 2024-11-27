@@ -1,0 +1,21 @@
+// here we are swapping the prev to next and next to prev using the prevEle variable 
+// like for example we use temp in swapping (a,b) similarly we use prevEle to swap next and prev pointer
+
+public class Solution
+{
+    public static Node reverseDLL(Node head)
+    {
+        // Write your code here.
+        if(head==null || head.next==null) return head;
+
+        Node curr=head;
+        Node prevEle=null;
+        while(curr!=null){
+            prevEle=curr.prev;
+            curr.prev=curr.next;
+            curr.next=prevEle;
+            curr=curr.prev;
+        }
+        return prevEle.prev;
+    }
+}
