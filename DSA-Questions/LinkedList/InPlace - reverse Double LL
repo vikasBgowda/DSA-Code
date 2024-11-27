@@ -1,0 +1,24 @@
+// we are changing the pointer of the next and prev to make it reverse
+// we are using threepointer we can also do with the help of two pointer - curr and prev
+
+
+public class Solution
+{
+    public static Node reverseDLL(Node head)
+    {
+        // Write your code here.
+        if(head==null || head.next==null) return head;
+        Node curr=head;
+        Node prevEle=null;
+        Node nextEle=null;
+        while(curr!=null){
+            prevEle=curr.prev;
+            nextEle=curr.next;
+            curr.next=prevEle;
+            curr.prev=nextEle;
+            curr=nextEle;
+        }
+        // return nextEle;
+        return prevEle.prev;
+    }
+}
