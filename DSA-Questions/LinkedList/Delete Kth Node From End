@@ -1,0 +1,28 @@
+// We use fast and slow pointer 
+// we move the fast pointer to K times first
+// now we move slow and fast pointer one step till fast reaches end now slow will be pointing to the prev element of the eleement to be removed
+// so now we can just do slow.next=slow.next.next and return head
+// edge cast is if we need to remove the first  element which in case we would tarvel till the end of the head, so we would check if fast==null before next while loop then if true then return head.next
+
+
+public class Solution
+{
+    public static Node removeKthNode(Node head, int K)
+    {
+        // Write your code here.
+        Node fast=head;
+        Node slow=head;
+        for(int i=0;i<K;i++){
+            fast=fast.next;
+        }
+        if(fast==null){
+            return head.next;
+        }
+        while(fast.next!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        slow.next=slow.next.next;
+        return head;
+    }
+}
