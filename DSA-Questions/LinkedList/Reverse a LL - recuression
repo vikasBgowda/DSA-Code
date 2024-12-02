@@ -1,0 +1,26 @@
+// We use recuression to reverse LL 
+// we pass next element till its last / single element
+// store the head of the reverse LL in newHead
+// now we just change first two elements since remaining nodes are reverse 
+// now head.next is pointing to null
+// we will keep an element front=head.next and we will make it to ponit head, which is ==> front.next=head;
+// and point the head to null
+// return the newHead
+
+public class Solution
+{
+    public static Node reverseLinkedList(Node head)
+    {
+        // Write your code here.
+        if(head==null || head.next==null){
+            return head;
+        }
+        Node newHead=reverseLinkedList(head.next);
+
+        Node front=head.next;
+        front.next=head;
+        head.next=null;
+        
+        return newHead;
+    }
+}
