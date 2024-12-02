@@ -1,0 +1,48 @@
+// Here we check if the given LL is palindrome or not
+// 3 steps we have to do which is 
+1. Check the middle of the linkedList using fast and slow pointer => edge case for even No we have two middle points we need to stand at first middle point
+2. reverse the second half of the linkedList, which is middle.next element
+3. Now from the start and from the second half check if each element has the same data
+
+public class Solution {
+    public static Node reverse(Node head){
+        if(head==null || head.next==null){
+            return head;
+        }
+        Node newHead=reverse(head.next);
+
+        Node front=head.next;
+        front.next=head;
+        head.next=null;
+        
+        return newHead;
+    }
+    public static boolean isPalindrome(Node head) {
+        // write your code here
+        // 1. Find the middle using fast and slow pointer
+        // 2. Reverse the second half of the linked List
+        // 3. Check the first and second half parellel
+        
+        if(head==null || head.next==null) return true;
+        Node fast=head;
+        Node slow=head;
+        while(fast.next!=null && fast.next.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+
+        Node newNode=reverse(slow.next);
+
+        fast=newNode;
+        slow=head;
+        while(fast!=null){
+            if(slow.data!=fast.data){
+                return false;
+            }
+            slow=slow.next;
+            fast=fast.next;
+        }
+        return true;        
+
+    }
+}
