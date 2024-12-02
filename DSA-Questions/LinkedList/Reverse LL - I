@@ -1,0 +1,18 @@
+// we are changing the links for the Node with the help of previous and next element
+
+public class Solution
+{
+    public static Node reverseLinkedList(Node head)
+    {
+        // Write your code here.
+        Node curr=head;
+        Node prev=null;
+        while(curr!=null){
+            Node next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+}
