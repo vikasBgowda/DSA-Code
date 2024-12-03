@@ -1,0 +1,31 @@
+//using recuression we to add 1 number to the LL
+// we go till the null value and return 1 if we reach null ==> which is we use backtracking
+once we reach null then it the last element next in which we have to add 1 so we return 1 if we reach null
+next for each call we check and add carry to sum and at last 
+we check it last return value (carry) equal to 1 then we create a newNode and link it head then return the newNode
+
+public class Solution {
+
+	public static int AddFn(Node head){
+		if(head==null) return 1;
+		int carry=AddFn(head.next);
+
+		head.data=head.data+carry;
+		if(head.data>=10){
+			head.data=0;
+			return 1;
+		}
+		return 0;
+	}
+	public static Node addOne(Node head) {
+		// Write your code here.
+		int carry=AddFn(head);
+		if(carry==1){
+			Node newNode=new Node(carry);
+			newNode.next=head;
+			return newNode;
+		}
+		return head;
+
+	}
+}
