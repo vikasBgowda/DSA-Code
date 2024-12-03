@@ -1,0 +1,26 @@
+// we are using slow and fast pointer to detect the loop in LL
+// first we move one step , because we need atleast one node to create a loop, so we won't check for the first node , so first we move then we check it
+// the idea in the slow and fast pointer is the distance between fast and slow initially is D and if loop exists and
+// the distance D would reduce D-1 for every iteration since fast -> 2 steps and slow -> 1 step
+// so after n iteration Distance D would be equal to 0 which is the distance between fast and slow , showing that loops exists.
+
+public class Solution {
+
+    public static boolean detectCycle(Node head) {
+        //Your code goes here
+        if(head.next==null){
+            return false;
+        }
+        Node fast=head;
+        Node slow=head;
+        while(fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;    
+            if(fast==slow){
+                return true;
+            }
+
+        }
+    return false;
+    }
+}
