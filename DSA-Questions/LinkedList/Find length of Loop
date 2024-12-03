@@ -1,0 +1,31 @@
+// Find the length of the loop in LL
+// Here we use same slow and fast if slow==fast then we known loop is present and In the current question we pass it to another function
+// since it is an loop i will keep slow at the same place and iterate the fast and increment count till i reach slow
+// now we get the length of the looop and return count
+
+public class Solution
+{
+    public static int findLenLoop(Node slow,Node fast){
+        int count=1;
+        Node t1=slow;
+        Node t2=fast;
+        while(t1.next!=t2){
+            count+=1;
+            t1=t1.next;
+        }
+        return count;
+    }
+    public static int lengthOfLoop(Node head) {
+        // Write your code here
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                return findLenLoop(slow,fast);
+            }
+        }
+        return 0;
+    }
+}
