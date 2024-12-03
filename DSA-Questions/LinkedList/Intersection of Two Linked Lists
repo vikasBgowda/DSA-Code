@@ -1,0 +1,29 @@
+// we find the interection point of two LL
+// we travel both the pointer on both the LL -> first we move it till the end then we move it to the next head 
+// idea is since we reach the end and move the next pointer the opposite end so we maintain the difference length and at a point it will be in the same distance
+// since we don't want to stuck in infinte loop we keep the condition as while ( temp1 ! = temp2 ) since 
+// if the LL don't colide at a point it reach both will reach null and it gets terimated
+
+t.c => 0(n1 + n2)
+
+public class Solution {
+    public static int findIntersection(Node firstHead, Node secondHead) {
+        //Write your code here
+        Node temp1=firstHead ;
+        Node temp2=secondHead;
+        
+        while(temp1!=temp2){
+            temp1=temp1.next;
+            temp2=temp2.next;
+
+            if(temp1==temp2){
+                return temp1.data;
+            }
+
+            if(temp1==null) temp1=secondHead;
+            if(temp2==null) temp2=firstHead;
+
+        }
+        return temp1.data;
+    }
+}
