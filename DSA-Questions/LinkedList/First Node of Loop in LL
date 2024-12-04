@@ -1,0 +1,28 @@
+// here we use slow and fast pointer to check if the loop exsits 
+// once we find the loop is there then we now slow to the head and move slow,fast one step at a time
+// again once fast==slow then we return either slow or fast
+
+public class Solution {
+    public static Node firstNode(Node head) {
+        // Write your code here.
+        if(head==null || head.next==null) return null;
+        Node fast=head;
+        Node slow=head;
+        while(fast!=null && fast.next!=null){
+
+            fast=fast.next.next;
+            slow=slow.next;
+            if(fast==slow) {
+                slow=head;
+                while(fast!=slow){
+                fast=fast.next;
+                slow=slow.next;
+                }
+                return slow;
+            }
+
+        }
+
+        return null;
+    }
+}
