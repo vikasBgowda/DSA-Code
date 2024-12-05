@@ -1,0 +1,39 @@
+// we use left and right pointer pointing to head and tail of the linkedList
+// we first add the value of left and right Pointer data and 
+if == k then we store it in list
+if > k then we move right => right=right.prev to reduce the sum
+if < k then we move left => left=left.next to increase the sum
+
+// since it is sorted we can use this two pointer approach
+
+public class Solution {
+
+    public static Node FindTail(Node head){
+        Node curr=head;
+        while(curr.next!=null){
+            curr=curr.next;
+        }
+        return curr;
+    }
+    public static ArrayList<int[]> findPairs(Node head, int k) {
+        // Write your code here.
+        ArrayList<int []>list=new ArrayList<>();
+
+        Node left=head;
+        Node right=FindTail(head);
+        while(left.data<right.data){
+            if(left.data+right.data==k){
+                list.add(new int[]{left.data,right.data});
+                left=left.next;
+                right=right.prev;
+            }
+            else if(left.data+right.data>k){
+                right=right.prev;
+            }
+            else{
+                left=left.next;
+            }
+        }
+        return list;
+    }
+}
