@@ -1,0 +1,6 @@
+// Since the array is sorted we use left and right pointer, pointing to first and last element of the array
+// we add left and right pointer and see if it is eqaul is sum 
+condition 1 . left + right == sum => store the pair and left ++ and right -- 
+  2. if (left + right > sum ) ==> right -- , since it is greater then the required sum the we move right to reduce the sum.
+  3. if (left + right < sum) ==> left++ , since it is smaller then sum, so we increase left to increase the sum.
+
