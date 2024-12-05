@@ -1,0 +1,23 @@
+// here we use N * N time complixity to solve this problem
+// Nexted For loop
+
+public class Solution {
+
+    public static ArrayList<int[]> findPairs(Node head, int k) {
+        // Write your code here.
+        ArrayList<int []>list=new ArrayList<>();
+        Node outer=head;
+        while(outer!=null){
+            Node inner=outer.next;
+
+            while(inner!=null){
+                if((inner.data+outer.data)==k){
+                    list.add(new int[]{inner.data,outer.data});
+                }
+                inner=inner.next;
+            }
+            outer=outer.next;
+        }
+        return list;
+    }
+}
