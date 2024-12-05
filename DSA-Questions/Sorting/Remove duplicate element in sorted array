@@ -1,0 +1,17 @@
+// since the array is sorted
+// we keep two pointer i=0,j=1 
+and we will iterate j till n-1
+we keep i as keep the track of unique elements 
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int i=0,j=1;
+        for(;j<nums.length;j++){
+            if(nums[i]!=nums[j]){
+                i++;
+                nums[i]=nums[j];
+            }
+        }
+        return i+1;
+    }
+}
