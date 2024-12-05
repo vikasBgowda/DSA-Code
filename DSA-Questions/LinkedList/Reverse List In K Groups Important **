@@ -1,0 +1,57 @@
+// Here we need to reverse LL in given K groups
+// First we find if there are K elements and if there are k elements then we find Kth Node
+// Once we find Kth Node we need to reverse that group but before reverse we need to break that group
+// but before break the link we need to save the nextNode of kth element
+// once we reverse the given batch - if it is first time then we just change head else we link the prev.next to temp
+// then after every iteration we change prev=temp and temp = NextNode
+
+public class Solution {
+    
+    public static Node FindKNode(Node head,int k){
+        Node curr=head;
+        k-=1;
+        while(curr!=null && k>0){
+            k--;
+            curr=curr.next;
+        }
+        return curr;
+    }
+
+    public static Node reverseKElement(Node head){
+        if(head.next==null){
+            return head;
+        }
+        Node NewNode=reverseKElement(head.next);
+
+        Node front=head.next;
+        front.next=head;
+        head.next=null;
+
+        return NewNode;
+    }
+    public static Node kReverse(Node head, int k) {
+        // Write your code here.
+        Node temp=head;
+        Node prev=null;
+        while(temp!=null){
+            Node Knode=FindKNode(temp,k);
+            if(Knode==null){
+                if(prev!=null) prev.next=temp;
+                break;
+            }
+            // if we have K element then we have to reverse but before reverse we have break link and save the next element
+            Node nextEle=Knode.next;
+            Knode.next=null;
+            reverseKElement(temp);
+            if(temp==head){
+                head=Knode;
+            }
+            else{
+                prev.next=Knode;
+            }
+            prev=temp;
+            temp=nextEle;
+        }
+        return head;
+    }
+}
