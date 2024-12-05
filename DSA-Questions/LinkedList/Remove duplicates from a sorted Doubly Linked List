@@ -1,0 +1,21 @@
+// similar to remove duplicates in array 
+// we keep two pointer i = 0 , j = 1 and check if ( i ! = j ) increase i and i.data = j.data 
+then move j.
+
+public class Solution {
+    public static Node uniqueSortedList(Node head) {
+        // Write your code here.
+        if(head==null || head.next==null) return head;
+        Node temp=head;
+        Node curr=head.next;
+        while(curr!=null){
+            if(curr.data!=temp.data){
+                temp=temp.next;
+                temp.data=curr.data;
+            }
+            curr=curr.next;
+        }
+        temp.next=null;
+        return head;
+    }
+}
