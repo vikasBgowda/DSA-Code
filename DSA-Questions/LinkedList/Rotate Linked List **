@@ -1,0 +1,29 @@
+// To rotate the LinkedList we would move to Length - Kth Node and make it null and then change the head to Length-Kth node next before making it to null
+// Before we travel to tail of the given LL and find the tail of the LL and Link the Tail of LL to the head of the LL
+
+public class Solution {
+    public static Node rotate(Node head, int k) {
+        // Write your code here.
+        Node tail=head;
+        int length=1;
+        while(tail.next!=null){
+            length++;
+            tail=tail.next;
+        }
+        if(k%length==0) return head;
+        
+        tail.next=head;
+        k=k%length;
+
+        int lastNode=length-k;
+        Node curr=head;
+        while(curr!=null && lastNode>1){
+            lastNode--;
+            curr=curr.next;
+        }
+        head=curr.next;
+        curr.next=null;
+
+        return head;
+    }
+}
