@@ -1,0 +1,32 @@
+// It is similar to merge two sorted array type but we are not using any extra space or creating new LL
+// we are changing the connection between two LL but compairing both LL 
+// At last we don't iterate for the remaining LL we just connect it to the temp 
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+		// Write your code here.
+        if(first==null) return second;
+        if(second==null) return first;
+        LinkedListNode dummy=new LinkedListNode(-1);
+        LinkedListNode temp=dummy;
+        LinkedListNode curr1=first;
+        LinkedListNode curr2=second;
+        while(curr1!=null && curr2!=null){
+            if((int)curr1.data < (int)curr2.data){
+                temp.next=curr1;
+                temp=temp.next;
+                curr1=curr1.next;
+            }else{
+                temp.next=curr2;
+                temp=temp.next;
+                curr2=curr2.next;
+            }
+        }
+        if(curr1!=null){
+            temp.next=curr1;
+        }
+        if(curr2!=null){
+            temp.next=curr2;
+        }
+        return dummy.next;
+	}
+}
