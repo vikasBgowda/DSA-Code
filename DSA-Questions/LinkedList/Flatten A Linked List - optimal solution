@@ -1,0 +1,51 @@
+// here we solve using the merge and recuression 
+// we create merger function which takes head1 and head2 and it is similar to merger two sorted array but in flatted -> child/bottom
+// Now we create one more function for recuressive since the merger function takes one two head and we have to merger for N number of heads in two two batch and again mergered LL with the New LL is mergered
+// we use backtracking we go till head.next!=null then we return head if last element else we call merger of the privous and current head then return the mergeref head
+
+
+public class Solution {
+    public static Node MergerLL(Node head1,Node head2){
+        if(head1==null) return head2;
+
+        if(head2==null) return head1;
+
+        Node dummy=new Node(-1);
+        Node res=dummy;
+        while(head1!=null && head2!=null){
+            if(head1.data<head2.data){
+                res.child=head1;
+                res=head1;
+                head1=head1.child;
+            }
+            else{
+                res.child=head2;
+                res=head2;
+                head2=head2.child;
+            }
+            res.next=null;
+        }
+        if(head1!=null){
+            res.child=head1;
+        }else{
+            res.child=head2;
+        }
+        if(dummy.child!=null){
+            dummy.child.next=null;
+        }
+        return dummy.child;
+    }
+    public static Node FlattenLL(Node head){
+        if(head==null || head.next==null) return head;
+
+        Node MergeHead=FlattenLL(head.next);
+        Node newNode=MergerLL(MergeHead, head);
+        
+        return newNode;
+    }
+    public static Node flattenLinkedList(Node head) {
+        //Write your code here
+        if(head==null || head.next==null) return head;
+        return FlattenLL(head);
+    }
+}
