@@ -1,0 +1,39 @@
+// we travel for each node and store the value in the array
+--> First N then for N we go till M (depth)
+// Then we sort the array 
+// At last we convert the sorted array to the flatten LL.
+
+import java.util.*;
+public class Solution {
+
+    public static Node ConvertLL(ArrayList<Integer> arr){
+        if(arr.size()==0) return null;
+
+        Node head=new Node(arr.get(0));
+        if(arr.size()==1) return head;
+        Node curr=head;
+        for(int i=1;i<arr.size();i++){
+            Node newNode=new Node(arr.get(i));
+            curr.child=newNode;
+            curr=curr.child;
+        }
+        return head;
+    }
+    public static Node flattenLinkedList(Node head) {
+        //Write your code here
+        ArrayList<Integer>arr=new ArrayList<>();
+        Node curr=head;
+        while(curr!=null){
+            Node temp=curr;
+            while(temp!=null)
+            {
+                arr.add(temp.data);
+                temp=temp.child;
+            }
+            curr=curr.next;
+        }
+        Collections.sort(arr);
+        Node newHead=ConvertLL(arr);
+        return newHead;
+    }
+}
