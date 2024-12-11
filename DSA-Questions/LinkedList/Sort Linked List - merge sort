@@ -1,0 +1,57 @@
+// First- brute force method would be copyying in array sorting array and placing in given LL back
+// Second - Now we use merge Sort method
+- In divide method we divide the given LL in single element and call the mergeTwo LL method
+- In mergeTwoLL we merge two LL and return the head of sorted LL
+
+public class Solution {
+
+	public static Node FIndMiddle(Node head){
+		// if(head==null) return head;
+		Node start=head;
+		Node end=head.next; //since we need the first middle in even Length
+		while(end!=null && end.next!=null){
+			start=start.next;
+			end=end.next.next;
+		}
+		return start;
+	}
+	public static Node MergerTwoLL(Node left,Node right){
+		if(left==null) return right;
+		if(right==null) return left;
+		Node dummy=new Node(-1);
+		Node res=dummy;
+		while(left!=null && right!=null){
+			if(left.data<right.data){
+				res.next=left;
+				left=left.next;
+				res=res.next;
+			}else{
+				res.next=right;
+				res=right;
+				right=right.next;
+			}
+		}
+		if(left!=null){
+			res.next=left;
+		}else{
+			res.next=right;
+		}
+		return dummy.next;
+	}
+	public static Node divideLL(Node head){
+		if(head==null) return head;
+		if( head.next==null) return head;
+
+		Node curr=FIndMiddle(head);
+		Node nextNode=curr.next;
+		curr.next=null;
+		Node left=divideLL(head);
+		Node right=divideLL(nextNode);
+		return MergerTwoLL(left,right);
+	}
+
+	public static Node sortLL(Node head) {
+		// Write your code here.
+		return divideLL(head);
+	}
+}
