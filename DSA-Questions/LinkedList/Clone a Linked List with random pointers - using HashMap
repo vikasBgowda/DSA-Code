@@ -1,0 +1,25 @@
+// we are cloning the LL using the HashMap => where we store <Node,Node> = > <orginal Node , cloned Node > 
+// again we iterate and link the all the elements as given in orginal LL
+
+public class Solution {
+    public static Node cloneLL(Node head) {
+        if(head==null) return head;
+        // Write your code here.
+        HashMap<Node,Node>map=new HashMap<>();
+        Node temp=head;
+        while(temp!=null){
+            Node newNode=new Node(temp.data);
+            map.put(temp,newNode);
+            temp=temp.next;
+        }
+        temp=head;
+
+        while(temp!=null){
+            Node copy=map.get(temp);
+            copy.next=map.get(temp.next);
+            copy.random=map.get(temp.random);
+            temp=temp.next;
+        }
+        return map.get(head);
+    }
+}
