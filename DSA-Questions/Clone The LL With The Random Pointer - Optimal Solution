@@ -1,0 +1,50 @@
+// Here we have clone the given LL with the random pointer
+// There are three steps which i have divided into three functions
+1. Add the cloned Node inbetween Nodes - given => 1 - > 2 -> 3 -> X   , cloned = > 1 -> 1C -> 2 -> 2C -> 3 -> 3C -> X  (c => cloned Node)
+2. Since there is also the random pointer inclued so we will link the random pointer of the clone LL.
+3. Now we will connect the next pointer and remove the cloned LL from the given LL
+
+public class Solution {
+    public static Node createNodeBetween(Node head){
+        Node temp=head;
+        while(temp!=null){
+            Node newNode=new Node(temp.data);
+            newNode.next=temp.next;
+            temp.next=newNode;
+            temp=temp.next.next;
+        }
+        return head;
+    }
+    public static Node LinkRandomPointer(Node head){
+        Node temp=head;
+        while(temp!=null){
+            Node copy=temp.next;
+            if(temp.random!=null){
+                copy.random=temp.random.next;
+            }else{
+                copy.random=null;
+            }
+            temp=temp.next.next;
+        }
+        return head;
+    } 
+    public static Node LinkNextPointer(Node head){
+        Node temp=head;
+        Node dummy=new Node(-1);
+        Node res=dummy;
+
+        while(temp!=null){
+            res.next=temp.next;
+            res=res.next;
+            temp.next=temp.next.next;
+            temp=temp.next;
+        }
+        return dummy.next;
+    }
+    public static Node cloneLL(Node head) {
+        // Write your code here.
+        head=createNodeBetween(head);
+        head=LinkRandomPointer(head);
+        return LinkNextPointer(head);
+    }
+}
