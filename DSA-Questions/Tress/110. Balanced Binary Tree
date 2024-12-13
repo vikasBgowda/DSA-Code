@@ -1,0 +1,19 @@
+// It is related to Height of the binary tree
+// Here we get left and right node height and if abs value of leftheight - rightheight > 1 then we return -1 
+
+import java.util.*;
+class Solution {
+    public static int getAns(TreeNode root){
+        if(root==null) return 0;
+        int leftNode=getAns(root.left);
+        if(leftNode==-1) return -1;
+        int rightNode=getAns(root.right);
+        if(rightNode==-1) return -1;
+        if(Math.abs(leftNode-rightNode)>1)return -1;
+        return 1+Math.max(leftNode,rightNode);
+    } 
+    public boolean isBalanced(TreeNode root) {
+        if(root==null) return true;
+        return getAns(root)!=-1;
+    }   
+}
