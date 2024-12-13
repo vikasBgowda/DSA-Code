@@ -1,0 +1,33 @@
+// Post order => Left Right Root
+// we store elements into the stack and move left and if we reach null then we take the top of the stack which is last element and move right
+// Then if the right is also null then we pop the element and store in List and we also check if the remove element and top right is same then we remove top and add to list again
+// At last we would asign temp = curr
+
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        Stack<TreeNode>st=new Stack<>();
+        List<Integer>ans=new ArrayList<>();
+        if(root==null) return ans;
+        TreeNode curr=root;
+        while(curr!=null || !st.isEmpty()){
+            if(curr!=null){
+                st.push(curr);
+                curr=curr.left;
+            }else{
+                TreeNode temp=st.peek().right;
+                if(temp==null){
+                    temp=st.pop();
+                    ans.add(temp.val);
+            
+                while(!st.isEmpty() && temp==st.peek().right){
+                    temp=st.pop();
+                    ans.add(temp.val);
+                }
+                }else{
+                    curr=temp;
+                }
+            }
+        }
+        return ans;
+    }
+}
