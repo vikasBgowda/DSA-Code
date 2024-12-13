@@ -1,0 +1,25 @@
+we use stack and store the curr node if not null then we move left 
+if node is empty then we check if stack is empty then we should break
+else we take the node from top of the stack and add the element in the result list then move right since we have travel left
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        Stack<TreeNode>st=new Stack<>();
+        List<Integer>res=new ArrayList<>();
+        TreeNode node=root;
+        while(true){
+            if(node!=null){
+                st.push(node);
+                node=node.left;
+            }else{
+                if(st.isEmpty()){
+                    break;
+                }
+                node=st.pop();
+                res.add(node.val);
+                node=node.right;
+            }
+        }
+        return res;
+    }
+}
