@@ -1,0 +1,14 @@
+// Height of the Binary Tree
+// We are using => 1 + Math.max(left,right)
+
+class Solution {
+    public static int FindHeight(TreeNode root){
+        
+        if(root==null)return 0;
+
+        int leftTree=FindHeight(root.left);
+        int rightTree=FindHeight(root.right);
+        return 1 + Math.max(leftTree,rightTree);
+
+    }
+}
