@@ -1,0 +1,17 @@
+// It is similar to find the height of the tree but we are using arr to keep the track of maximum height 
+class Solution {
+    public int findDiameter(TreeNode root,int res[]){
+        if(root==null) return 0;
+
+        int leftTree=findDiameter(root.left,res);
+        int rightTree=findDiameter(root.right,res);
+        res[0]=Math.max(res[0],leftTree+rightTree);
+
+        return 1+Math.max(leftTree,rightTree);
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        int arr[]={Integer.MIN_VALUE};
+        findDiameter(root,arr);
+        return arr[0];
+    }
+}
