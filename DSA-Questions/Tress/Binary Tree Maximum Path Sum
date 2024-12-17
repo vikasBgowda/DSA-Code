@@ -1,0 +1,20 @@
+// For every Node we calculate 2 points while backtracking
+1 - Maximun sum = leftTree + RightTree + curr.data
+2 - we return curr.data + Math.max( left , right ) => since we need maximun value so we choose the maximun value side for the travel
+class Solution {
+    public int findMaxPath(TreeNode root,int maxi[]){
+        if(root==null) return 0;
+
+        int leftTreeMaxValue=Math.max(0,findMaxPath(root.left,maxi));
+        int rightTreeMaxValue=Math.max(0,findMaxPath(root.right,maxi));
+
+        maxi[0]=Math.max(maxi[0],leftTreeMaxValue+rightTreeMaxValue+root.val);
+        return root.val+Math.max(leftTreeMaxValue,rightTreeMaxValue);
+    }
+    public int maxPathSum(TreeNode root) {
+        if(root==null) return 0;
+        int res[]={Integer.MIN_VALUE};
+        findMaxPath(root,res);
+        return res[0];
+    }
+}
