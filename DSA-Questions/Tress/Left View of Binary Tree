@@ -1,0 +1,27 @@
+// To find the left view of the binary tree . we have to get the first element of the each level
+// It is similar to right view of the binary tree
+// so in Right view we travel from right then left 
+and now in left view we travel from left and right
+
+class Solution {
+    public void findleftView(Node root,int level,ArrayList<Integer>arr){
+        if(root==null){
+            return;
+        }
+        if(level==arr.size()){
+            arr.add(root.data);
+        }
+        findleftView(root.left,level+1,arr);
+        findleftView(root.right,level+1,arr);
+    }
+    // Function to return list containing elements of left view of binary tree.
+    ArrayList<Integer> leftView(Node root) {
+        // code here
+        ArrayList<Integer>arr=new ArrayList<>();
+        if(root==null){
+            return arr;
+        }
+        findleftView(root,0,arr);
+        return arr;
+    }
+}
