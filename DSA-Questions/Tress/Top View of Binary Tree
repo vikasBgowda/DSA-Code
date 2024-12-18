@@ -1,0 +1,46 @@
+we are using level order travel and also pair class for storing vertical index along with node
+- we are not using recursive traversal because we could reach the node below the top node before reaching the top node 
+and if we need to use recursive traveral then we should also use height method so level order traversal is better
+- On each vertical index we are just storing the first element and moving forward.
+- at last adding it to list and returning the list as answer
+
+
+class pair{
+    Node node;
+    int index;
+    pair(Node node,int index){
+        this.node=node;
+        this.index=index;
+    }
+}
+class Solution {
+    // Function to return a list of nodes visible from the top view
+    // from left to right in Binary Tree.
+    static ArrayList<Integer> topView(Node root) {
+        // code here
+        Queue<pair>qq=new LinkedList<>();
+        TreeMap<Integer,Integer>map=new TreeMap<>();
+        ArrayList<Integer>res=new ArrayList<>();
+        if(root==null) return res;
+        
+        qq.add(new pair(root,0));
+        while(!qq.isEmpty()){
+            pair curr=qq.remove();
+            Node node=curr.node;
+            int index=curr.index;
+            if(!map.containsKey(index)){
+                map.put(index,node.data);
+            }
+            if(node.left!=null){
+                qq.add(new pair(node.left,index-1));
+            }
+            if(node.right!=null){
+                qq.add(new pair(node.right,index+1));
+            }
+        }
+        for(Map.Entry<Integer,Integer>curr:map.entrySet()){
+            res.add(curr.getValue());
+        }
+        return res;
+    }
+}
