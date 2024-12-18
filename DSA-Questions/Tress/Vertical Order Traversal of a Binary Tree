@@ -1,0 +1,61 @@
+// we are travering vertical so we use the coordinates method (x-axis, y-axis)
+Treemap ( x - axis , TreeMap ( y - axis , PriorityQueue<Integer> > > map
+
+so here we store vertical and level order 
+so if there are various elements in the same vertixs so we store all the various elements of different order in one list 
+add the list for a single vertix  example : -2 -1 0 1 2 
+
+import java.util.*;
+class tuple{
+    TreeNode node;
+    int left;
+    int right;
+    tuple(TreeNode node,int left,int right){
+        this.node=node;
+        this.left=left;
+        this.right=right;
+    }
+}
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        List<List<Integer>>res=new ArrayList<>();
+        if(root==null) return res;
+        TreeMap<Integer,TreeMap<Integer,PriorityQueue<Integer>>>map=new TreeMap<>();
+        Queue<tuple>qq=new LinkedList<>();
+        qq.add(new tuple(root,0,0));
+        while(!qq.isEmpty()){
+            tuple popEle=qq.remove();
+            TreeNode curr=popEle.node;
+            int x=popEle.left;
+            int y=popEle.right;
+
+            if(!map.containsKey(x)){
+                map.put(x,new TreeMap<>());
+            }
+            if(!map.get(x).containsKey(y)){
+                map.get(x).put(y,new PriorityQueue<>());
+            }
+            map.get(x).get(y).offer(curr.val);
+
+            if(curr.left!=null){
+                qq.add(new tuple(curr.left,x-1,y+1));
+            }
+            if(curr.right!=null){
+                qq.add(new tuple(curr.right,x+1,y+1));
+            }
+        }
+        for(Map.Entry<Integer,TreeMap<Integer,PriorityQueue<Integer>>>outer:map.entrySet()){
+            TreeMap<Integer,PriorityQueue<Integer>>inner=outer.getValue();
+            List<Integer>list=new ArrayList<>();
+            for(Map.Entry<Integer,PriorityQueue<Integer>>curr:inner.entrySet()){
+                PriorityQueue<Integer>pq=curr.getValue();                
+                while(!pq.isEmpty()){
+                    list.add(pq.poll());
+                }
+                
+            }
+            res.add(list);
+        }
+        return res;
+    }
+}
