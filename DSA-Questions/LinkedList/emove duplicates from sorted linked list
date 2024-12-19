@@ -1,0 +1,24 @@
+we are checking if the next element from the current elements are same the we are connecting the current element to the next .next
+and we are also checking if ther exist curr.next.next (if the last element is the duplicate ) then we make curr.next = null and return
+
+class Solution {
+    // Function to remove duplicates from sorted linked list.
+    Node removeDuplicates(Node head) {
+        // Your code here
+        if(head==null || head.next==null){
+            return head;
+        }
+        Node curr=head;
+        while(curr.next!=null){
+            while(curr.data==curr.next.data){
+                if(curr.next.next==null){
+                    curr.next=null;
+                    return head;
+                }
+                curr.next=curr.next.next;
+            }
+            curr=curr.next;
+        }
+        return head;
+    }
+}
