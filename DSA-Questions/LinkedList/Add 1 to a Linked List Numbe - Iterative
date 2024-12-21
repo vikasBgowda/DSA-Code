@@ -1,0 +1,56 @@
+add one iterative way 
+- First we reverse the LinkedList then we travel from the end , and keep the tracker of boolean variable isAdded
+- 1. Just for one check we have to add at first apart from the digit 9 which has a carry forword
+- 2. We check if there is any carry forword if carry == 0 then we return / break
+- 3. If we have carry then we add it to the current data and update the carry and current . data
+
+class Solution {
+    public Node reverse(Node head){
+        if(head.next==null) return head;
+        Node nextNode=reverse(head.next);
+        Node front=head.next;
+        front.next=head;
+        head.next=null;
+        return nextNode;
+    }
+    public Node addOne(Node head) {
+        // code here.
+        if(head==null) return head;
+        Node newNode=reverse(head);
+        Node curr=newNode;
+        int carry=0;
+        int sum=0;
+        boolean added=false;
+        while(curr!=null){
+            if(added==false){
+                added=true;
+                sum=curr.data+1;
+                carry=sum/10;
+                if(carry==0){
+                    curr.data=sum;
+                    break;
+                }else{
+                    curr.data=sum%10;
+                }
+            }
+            else if(carry==0){
+                break;
+            }
+            else{
+                sum=curr.data+carry;
+                curr.data=sum%10;
+                carry=sum/10;
+            }
+            // System.out.println("hi")
+            curr=curr.next;
+        }
+        head=reverse(newNode);
+        if(carry!=0){
+            Node extraOne=new Node(1);
+            extraOne.next=head;
+            return extraOne;
+        }
+        return head;
+        
+    }
+}
