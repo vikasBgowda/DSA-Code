@@ -1,0 +1,65 @@
+class Solution {
+    // Function to reverse a circular linked list
+    Node reverse(Node head) {
+        // System.out.println("Hi in the reverse ");
+        // code here
+        if(head==null || head.next==null){
+            return head;
+        }
+        Node curr=head.next;
+        Node prev=head;
+        while(curr!=head){
+            Node nextNode=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=nextNode;
+        }
+        head.next=prev;
+        head=prev;
+        return head;
+    }
+
+    // Function to delete a node from the circular linked list
+    Node deleteNode(Node head, int key) {
+        // code here
+        if(head==null) {
+             return head;
+        }
+        if(head.data==key){
+            if(head.next==head){
+                return null;
+            }
+            Node newHead=head.next;
+            Node curr=newHead;
+            while(curr.next!=head){
+                curr=curr.next;
+            }
+            curr.next=newHead;
+            return newHead;
+        }
+        Node curr=head;
+        Node prev=head;
+        while(curr.next!=head && curr.data!=key){
+            prev=curr;
+            curr=curr.next;
+        }
+        if(curr.data==key){
+            prev.next=curr.next;
+        }
+        return head;
+        
+        // -----------------------------------
+        // Node curr=head;
+        // while(curr.data!=key){
+        //     curr=curr.next;
+        //     if(curr==head){
+        //         break;
+        //     }
+        // }
+        // if(curr.data==key){
+        //     curr.data=curr.next.data;
+        //     curr.next=curr.next.next;
+        // }
+        // return head;
+    }
+}
