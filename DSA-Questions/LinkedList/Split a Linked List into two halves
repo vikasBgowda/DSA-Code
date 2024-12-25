@@ -1,0 +1,28 @@
+// we are going to the middle of the given linked List
+// We should make the both LL circular again so 
+- first we should make second head to point middle next element
+- keep the temp variable to point to new head or middle next element
+- Point middle next element to first head to make first LL circular
+- now with the temp node we travel till temp next ! = head 
+- we point the last next element to second head to make it circular 
+
+class Solution {
+    public Pair<Node, Node> splitList(Node head) {
+        // if(head==null || head.next==null) return new Pair({});
+        Node head1=head;
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=head && fast.next!=head){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node temp=slow.next;
+        Node head2=slow.next;
+        slow.next=head1;
+        while(temp.next!=head){
+            temp=temp.next;
+        }
+        temp.next=head2;
+        return new Pair(head1,head2);
+    }
+}
