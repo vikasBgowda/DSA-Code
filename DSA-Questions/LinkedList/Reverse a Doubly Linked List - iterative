@@ -1,0 +1,19 @@
+-It is similar to reversing a single LL 
+- We go till curr is not equal to null and use of the three pointer prev, curr, next for the reversing of the DLL
+
+class Solution {
+    public DLLNode reverseDLL(DLLNode head) {
+        // Your code here
+        if(head==null || head.next==null) return head;
+        DLLNode prev=null;
+        DLLNode curr=head;
+        while(curr!=null){
+            DLLNode nextNode=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr.prev=nextNode;
+            curr=nextNode;
+        }
+        return prev;
+    }
+}
