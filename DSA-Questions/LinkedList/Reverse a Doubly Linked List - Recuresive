@@ -1,0 +1,26 @@
+It is similar to Reverse single LL
+we will travel till the last node and keep changing the pointer in recuressive manager
+
+class Solution {
+    public DLLNode recuresionDLL(DLLNode head){
+        if(head.next==null){
+            return head;
+        }
+        DLLNode newHead=recuresionDLL(head.next);
+        
+        DLLNode nextNode=head.next;
+        head.prev=nextNode;
+        nextNode.next=head;
+        head.next=null;
+        
+        return newHead;
+    }
+    public DLLNode reverseDLL(DLLNode head) {
+        // Your code here
+        if(head==null || head.next==null){
+            return head;
+        }
+        return recuresionDLL(head);
+        
+    }
+}
