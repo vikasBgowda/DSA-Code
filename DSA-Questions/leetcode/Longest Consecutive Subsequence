@@ -1,0 +1,30 @@
+- Here we are solving this using a array which we will store all the elements at the start
+- Again we iterate through the loop and see if arr[i] - 1 is not available in the array means it is the starting element of the sequence
+- And we run a inner while loop and increament count and value to count the sequence.
+
+class Solution {
+
+    // Function to return length of longest subsequence of consecutive integers.
+    public int longestConsecutive(int[] arr) {
+        // code here
+        ArrayList<Integer>list=new ArrayList<>();
+        int n=arr.length;
+        if(n==0 || n==1) return n;
+        for(int i=0;i<n;i++){
+            list.add(arr[i]);
+        }
+        int res=0;
+        for(int i=0;i<n;i++){
+            if(!list.contains(arr[i]-1)){
+                int count=1;
+                int value=arr[i]+1;
+                while(list.contains(value)){
+                    count+=1;
+                    value+=1;
+                }
+                res=Math.max(count,res);
+            }
+        }
+        return res;
+    }
+}
