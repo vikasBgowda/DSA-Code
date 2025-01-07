@@ -1,0 +1,28 @@
+// Here we are printing the path from the root to the leaf root
+// we are just traveling from the root and add the string with root and symbol " -> '
+// Once we reach the leaf node we add it to string and add it the result arraylist
+// Once we call the function with the arraylist and return the arraylist
+
+class Solution {
+    public void path(TreeNode root,String str,List<String>list){
+        if(root==null){
+            return ;
+        }
+        if(root.left==null && root.right==null){
+            str+=root.val;
+            list.add(str);
+            return;
+        }
+        str+=root.val;
+        path(root.left,str+"->",list);
+        path(root.right,str+"->",list);
+    }
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String>res=new ArrayList<>();
+        if(root==null){
+            return res;
+        }
+        path(root,"",res);
+        return res;
+    }
+}
