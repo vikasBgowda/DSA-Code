@@ -1,0 +1,28 @@
+// Here we add all the elements till leaf in the array and once we reach the leaf node then we add the curr list to the result list
+// then we left and right with adding the node to the array
+// and once we travel left and right then we remove the curr node from the array then move back
+
+class Solution {
+    public static void findpath(Node root,ArrayList<Integer>list,ArrayList<ArrayList<Integer>>res){
+        if(root==null){
+            return;
+        }
+        list.add(root.data);
+        if(root.left==null && root.right==null){
+            res.add(new ArrayList<>(list));
+        }
+        findpath(root.left,list,res);
+        findpath(root.right,list,res);
+        list.remove(list.size()-1);
+    }
+    public static ArrayList<ArrayList<Integer>> Paths(Node root) {
+        // code here
+        ArrayList<ArrayList<Integer>>res=new ArrayList<>();
+        if(root==null){
+            return res;
+        }
+        ArrayList<Integer>list=new ArrayList<>();
+        findpath(root,list,res);
+        return res;
+    }
+}
