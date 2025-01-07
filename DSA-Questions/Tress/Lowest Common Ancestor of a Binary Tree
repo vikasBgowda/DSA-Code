@@ -1,0 +1,37 @@
+// Here we are try to find the lowest common ancestor.
+// We do the dfs - depth first search and while travelling if we get the either p or q like (root==p or root==q)
+// if not we travel left and right 
+// condition - 1. if (left!=null && right!=null) then we return root -> that is the lca of the tree with the given number;
+   condition - 2. if (left !=null && right==null) then we return left since it says that left side we have found one of the element.
+   conditon - 3. if (left==null && right!=null) then we return right, it says right side we have found the element and return the right element.
+   condition - 4. if (left==null and also right==null), then it says left and right element is not found so we return null.
+
+
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null){
+            return null;
+        }
+        if(root==p || root==q){
+            return root;
+        }
+        TreeNode left=lowestCommonAncestor(root.left,p,q);
+        TreeNode right=lowestCommonAncestor(root.right,p,q);
+        // if(left!=null && right!=null){
+        //     return root;
+        // }
+        // else if(left!=null && right==null){
+        //     return left;
+        // }else if(left==null && right!=null){
+        //     return right;
+        // }
+        //  --------------------------------
+        if(left==null){
+            return right;
+        }else if(right==null){
+            return left;
+        }
+        // if both are not null then we return root value 
+        return root;
+    }
+}
