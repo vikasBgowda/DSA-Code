@@ -1,0 +1,3 @@
+// Here First we try to check the sum of left and right nodes
+- if(sum of left and right > root.data) - change root.data to sum
+  if it is less then root.data then change the left root and right root value to the root data
