@@ -1,0 +1,35 @@
+// - complete tree is a tree where all the nodes are completely filled and only at the last level nodes are filled from left to right
+// - Here we use the property of complete tree which is if level is 2 ==> 2 power level - 1 ==> 2*2 - 1 ==> 4 - 1 => 3 Nodes for level 2
+//- On every node we check left height and right height of the current node, if left and right height it same then we can use the formalu to find the Number of nodes ,
+And if left and right height is same we can calcualte using formula and return the No. of nodes, then it is not required to traverse further.
+//- if left and right height is not same then we go the subtree and calculate => 1 + countNode(left) + countNode(right)
+which is 1 + Number of Nodes in left + Number of Nodes in right
+
+class Solution {
+    public int countNodes(TreeNode root) {
+        if(root==null) return 0;
+
+        int leftHeight=LeftHeight(root);
+        int rightHeight=RightHeight(root);
+
+        if(leftHeight==rightHeight) return (1<<leftHeight) - 1;
+
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+    public int LeftHeight(TreeNode root){
+        int count=0;
+        while(root!=null){
+            count++;
+            root=root.left;
+        }
+        return count;
+    }
+    public int RightHeight(TreeNode root){
+        int count=0;
+        while(root!=null){
+            count++;
+            root=root.right;
+        }
+        return count;
+    }
+}
