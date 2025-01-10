@@ -1,0 +1,70 @@
+// - here we are trying to find the time taken to burn the tree from the targetted node
+// - We use parent hashmap to keep the track of the parent pointer of the given node
+// - We move left, right, and up oon each node --> every time 1 batch of nodes are burned so we would level order and size for - loop
+//- we also increase the count only if we burn any nodes in that iteration
+    public static void ConnectParent(Node root, HashMap<Node,Node>parent){
+        if(root==null) return;
+        Queue<Node>queue=new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            Node curr=queue.remove();
+            if(curr.left!=null){
+                parent.put(curr.left,curr);
+                queue.add(curr.left);
+            }
+            if(curr.right!=null){
+                parent.put(curr.right,curr);
+                queue.add(curr.right);
+            }
+        }
+    }
+    public static Node FindTarget(Node root,int target){
+        if(root==null)return null;
+        if(root.data==target) return root;
+        Node left=FindTarget(root.left,target);
+        if(left!=null)return left;
+        Node right=FindTarget(root.right,target);
+        if(right!=null) return right;
+        
+        return null;
+        
+    }
+    public static int minTime(Node root, int target) {
+        // code here
+        if(root==null){
+            return 0;
+        }
+        HashMap<Node,Node>parent=new HashMap<>();
+        ConnectParent(root,parent);
+        ArrayList<Node>visited=new ArrayList<>();
+        Queue<Node>queue=new LinkedList<>();
+        Node TargetNode=FindTarget(root,target);
+        queue.add(TargetNode);
+        visited.add(TargetNode);
+        int count=0;
+        while(!queue.isEmpty()){
+            int size=queue.size();
+            boolean burn=false;
+            for(int i=0;i<size;i++){
+                Node curr=queue.remove();
+                if(curr.left!=null && !visited.contains(curr.left)){
+                    queue.add(curr.left);
+                    visited.add(curr.left);
+                    burn=true;
+                }
+                if(curr.right!=null && !visited.contains(curr.right)){
+                    queue.add(curr.right);
+                    visited.add(curr.right);
+                    burn=true;
+                }
+                if(parent.containsKey(curr) && !visited.contains(parent.get(curr))){
+                    queue.add(parent.get(curr));
+                    visited.add(parent.get(curr));
+                    burn=true;
+                }
+            }
+            if(burn==true)count++;
+        }
+        return count;
+    }
+}
