@@ -1,0 +1,37 @@
+- here we are constructing a unique binary tree using the preorder and inorder array
+- since preorder - Root , left , right => first element is the root of the given tree
+  => inorder - left , root, right => from the given node whatever is on left of array is left sub-tree similarlly on right side of array is right-subtree
+ import java.util.*;
+class Solution {
+    public int findIndex(int arr[],int key){
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==key){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public TreeNode ConstractTree(int[] preorder, int[] inorder,HashMap<Integer,Integer>indexMap,int preStart,int preEnd,int inStart,int inEnd){
+        if(preStart > preEnd || inStart > inEnd){
+            return null;
+        }
+        int index=indexMap.get(preorder[preStart]);
+        int leftSide=index-inStart;
+        TreeNode newNode=new TreeNode(preorder[preStart]);
+        newNode.left=ConstractTree(preorder,inorder,indexMap,preStart+1,preStart+leftSide,inStart,index-1);
+        newNode.right=ConstractTree(preorder,inorder,indexMap,preStart+leftSide+1,preEnd,index+1,inEnd);
+        return newNode;
+    }
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder.length==0 || inorder.length==0){
+            return null;
+        }
+        HashMap<Integer,Integer>map=new HashMap<>();
+        for(int i=0;i<inorder.length;i++){
+            map.put(inorder[i],i);
+        }
+        System.out.println(map);
+        // return null;
+        return ConstractTree(preorder,inorder,map,0,preorder.length-1,0,inorder.length-1);
+    }
+}
