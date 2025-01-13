@@ -1,0 +1,35 @@
+// Here we find move to right most element of the sub-tree and make connection to the root node
+- 1. if left is null then we print the node and move to right (LEFT ROOT RIGHT).
+- 2. If there exist leftt then we keep prev pointer the left node of curr make connection to the curr node
+  ---- Here we check if there is no connection then we make a conection from the right most element of the subtree to the curr node and move left
+  ---- If connection already exist then we remove the connection and print curr then move the curr to right node
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        TreeNode curr=root;
+        List<Integer>res=new ArrayList<>();
+        while(curr!=null){
+            //If there is no left then we print node and move right
+            if(curr.left==null){
+                res.add(curr.val);
+                curr=curr.right;
+            }else{
+                // if there exist left node
+                TreeNode prev=curr.left;
+                while(prev.right!=null && prev.right!=curr){
+                    prev=prev.right;
+                }
+                //connecting to the curr node
+                if(prev.right==null){
+                    prev.right=curr;
+                    curr=curr.left;
+                } else{
+                    prev.right=null;
+                    res.add(curr.val);
+                    curr=curr.right;
+                }
+            }
+        }
+        return res;
+    }
+}
