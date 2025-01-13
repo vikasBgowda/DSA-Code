@@ -1,0 +1,37 @@
+class Solution{
+    class Pair{
+        int height;
+        int sum;
+        Pair(int height,int sum){
+            this.height=height;
+            this.sum=sum;
+        }
+    }
+    public Pair findSum(Node root){
+        if(root==null)return new Pair(0,0);
+        
+        Pair left=findSum(root.left);
+        Pair right=findSum(root.right);
+        
+        int MaxHeight=Math.max(left.height,right.height);
+        int MaxSum=root.data;
+        
+        if(left.height==right.height){
+            MaxSum+=Math.max(left.sum,right.sum);
+        }
+        else if(left.height>right.height){
+            MaxSum+=left.sum;
+        }else{
+            MaxSum+=right.sum;
+        }
+        return new Pair(MaxHeight + 1, MaxSum);
+    }
+    public int sumOfLongRootToLeafPath(Node root)
+    {
+        //code here
+        if(root==null){
+            return 0;
+        }
+        return findSum(root).sum;
+    }
+}
