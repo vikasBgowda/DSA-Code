@@ -1,0 +1,10 @@
+- We are moving till we reach null and we are deciding to go left or right by comparing root val and given val
+
+class Solution {
+    public TreeNode searchBST(TreeNode curr, int val) {
+        while(curr!=null && curr.val!=val){
+            curr= curr.val>val?curr.left:curr.right;
+        }
+        return curr;
+    }
+}
