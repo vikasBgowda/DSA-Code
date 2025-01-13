@@ -1,0 +1,25 @@
+// Here we use stack to keep track and link the nodes -- similar to preorder traversal using stack ==> print , right first then left
+// first we add root to the stack and add right node first then left node
+// now again we have to link the curr node right to the next node of converted LL so we connect right of the curr node to stack top element which would be left element of the curr node
+// and we also change the curr node left to null
+
+class Solution {
+    public void flatten(TreeNode root) {
+        if(root==null) return;
+        Stack<TreeNode>st=new Stack<>();
+        st.push(root);
+        while(!st.isEmpty()){
+            TreeNode curr=st.pop();
+            if(curr.right!=null){
+                st.push(curr.right);
+            }
+            if(curr.left!=null){
+                st.push(curr.left);
+            }
+            if(!st.isEmpty()){
+                curr.right=st.peek();
+            }
+            curr.left=null;
+        }
+    }
+}
