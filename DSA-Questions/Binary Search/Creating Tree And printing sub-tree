@@ -1,0 +1,55 @@
+//- Here we are creating a binary search using inorder and preorder
+// - Then we are printing the all the sub-tree of the binary tree created
+
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class Main {
+    static class Node{
+        Node left;
+        Node right;
+        int data;
+        Node(int data){
+            left=null;
+            this.data=data;
+            right=null;
+        }
+    }
+    public static String PrintingAllTrees(Node root,HashMap<String,Integer>map){
+        if(root==null) return "N";
+        String left=PrintingAllTrees(root.left,map);
+        String right=PrintingAllTrees(root.right,map);
+        String currSubTree=root.data+","+left+","+right;
+        
+        map.put(currSubTree,map.getOrDefault(currSubTree,0)+1);
+        return currSubTree;
+        
+    }
+    public static Node createTree(int inorder[],int inStart,int inEnd,int preorder[],int preStart,int preEnd,HashMap<Integer,Integer>map){
+
+        if(inStart>inEnd || preStart>preEnd){
+            return null;
+        }
+        Node newNode=new Node(preorder[preStart]);
+        int index=map.get(preorder[preStart]);
+        int left=index-inStart;
+        newNode.left=createTree(inorder,inStart,index-1,preorder,preStart+1,preStart+left,map);
+        newNode.right=createTree(inorder,index+1,inEnd,preorder,preStart+left+1,preEnd,map);
+        return newNode;
+    } 
+    public static void main(String[] args) {
+        int inorder[]={3,2,4,1,6,5,7};
+        int preorder[]={1,2,3,4,5,6,7};
+        HashMap<Integer,Integer>map=new HashMap<>();
+        for(int i=0;i<inorder.length;i++){
+            map.put(inorder[i],i);
+        }
+        Node root=createTree(inorder,0,inorder.length-1,preorder,0,preorder.length-1,map);
+        System.out.println("Root = "+root.left.data);
+        HashMap<String,Integer>AllTree=new HashMap<>();
+        PrintingAllTrees(root,AllTree);
+        for(Map.Entry<String,Integer>value:AllTree.entrySet()){
+            System.out.println(value.getKey());
+        }
+    }
+}
