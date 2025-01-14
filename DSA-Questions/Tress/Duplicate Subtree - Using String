@@ -1,0 +1,30 @@
+
+class Solution {
+    boolean checkLeaf(Node root){
+        if(root==null)return false;
+        if(root.left==null && root.right==null) return true;
+        return false;
+    }
+    String findDuplicate(Node root,HashMap<String,Integer>map){
+        if(root==null) return "N";
+        String left=findDuplicate(root.left,map);
+        String right=findDuplicate(root.right,map);
+        String subTree=root.data+","+left+","+right;
+        if(checkLeaf(root)!=true){
+            map.put(subTree,map.getOrDefault(subTree,0)+1);
+        }
+        return subTree;
+    }
+    int dupSub(Node root) {
+        // code here 
+        HashMap<String,Integer>map=new HashMap<>();
+        findDuplicate(root,map);
+
+        for(int i:map.values()){
+            if(i>1){
+                return 1;
+            }
+        }
+        return 0;
+    }
+}
