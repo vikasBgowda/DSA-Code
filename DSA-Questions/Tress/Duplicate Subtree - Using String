@@ -1,3 +1,4 @@
+// - We are checking if there is duplicate sub-tree
 
 class Solution {
     boolean checkLeaf(Node root){
