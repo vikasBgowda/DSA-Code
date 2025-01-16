@@ -1,0 +1,30 @@
+// Here we need to find the k-th largest element in binery search tree
+-- 1st method => we do inorder traverse and return k th element from array
+-- 2nd method => To aviod extra space we can use counter and result to store result and do inorder travel and increase the counter
+
+// So K th largest we can do reverse of inorder => right root left 
+// for K th smallest we can do inorder =>  left root right
+for both the case we need couter and result variable to keep track of counter and result to store the kth element
+
+class Solution {
+    public void findAns(TreeNode root,int count[],int result[],int key){
+        if(root==null){
+            return ;
+        }
+        findAns(root.left,count,result,key);
+        count[0]=count[0]+1;
+        if(count[0]==key){
+            result[0]=root.val;
+            return;
+        }
+        findAns(root.right,count,result,key);
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        if(root==null){
+            return 0;
+        }
+        int count[]={0};
+        int result[]={Integer.MIN_VALUE};
+        findAns(root,count,result,k);
+    }
+}
