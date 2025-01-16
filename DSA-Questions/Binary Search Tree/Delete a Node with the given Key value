@@ -1,3 +1,10 @@
+// Here first we find the if root.left value ==> key then we call function for root.left = function
+// This function would make the connection and give the new head so using recursion we can directly connect it
+// Now inside the function
+    - first we go to right of the keyNode
+    - then we find the left most node of the right node of keyNode 
+    - Then we attach the leftNode to the leftest node of right node of keynode then we return root.right
+since we have done attach to the root.right ==> leftmost node
 
 class Solution {
     public TreeNode findRightLastNode(TreeNode root){
