@@ -1,0 +1,18 @@
+// Here we are finding the least common aneaster of the given two values
+// Here we check for each node => 
+    - if both the given value falls under left then we move left
+    - similarly if both falls right then we move right.
+    - but if one falls left and one falls right then that node would be least common aneastor of the given value.
+
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root.val>p.val && root.val>q.val){
+            return lowestCommonAncestor(root.left,p,q);
+        }
+        else if(root.val<p.val && root.val<q.val){
+            return lowestCommonAncestor(root.right,p,q);
+        }else{
+            return root;
+        }
+    }
+}
