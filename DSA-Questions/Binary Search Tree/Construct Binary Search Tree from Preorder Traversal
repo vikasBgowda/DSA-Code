@@ -1,0 +1,19 @@
+// we are using range method if it satisify which means if it falls inbetween min and max value then 
+// we create node and call for left and right with the increase of index value.
+
+class Solution {
+    int index=0;
+    public TreeNode FindAns(int preorder[],int min,int max){
+        if(index==preorder.length || preorder[index]<=min || preorder[index]>=max){
+            return null;
+        }
+        TreeNode newNode=new TreeNode(preorder[index++]);
+        newNode.left=FindAns(preorder,min,newNode.val);
+        newNode.right=FindAns(preorder,newNode.val,max);
+
+        return newNode;
+    }
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return FindAns(preorder,Integer.MIN_VALUE,Integer.MAX_VALUE);
+    }
+}
