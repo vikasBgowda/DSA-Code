@@ -1,0 +1,25 @@
+// we are construct Tree using the upper bond only 
+// we will get upper bond on each iteration
+- first we would check if index is not greater then size of preorder array and value of current index is greater then upper bond
+      ==> if true then return null
+- we would go to find left of the newCreate Node with upperbond currNode value
+- if we go to right then upperbond would change to the upperbond(same) given to the current node
+
+- return newNode
+
+class Solution {
+    int index=0;
+    public TreeNode ConstructTree(int []preorder,int upperBond){
+        if(index==preorder.length || preorder[index]>upperBond){
+            return null;
+        }
+        TreeNode newNode=new TreeNode(preorder[index++]);
+        newNode.left=ConstructTree(preorder,newNode.val);
+        newNode.right=ConstructTree(preorder,upperBond);
+
+        return newNode;
+    }
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return ConstructTree(preorder,Integer.MAX_VALUE);
+    }
+}
