@@ -1,0 +1,36 @@
+// Here we are find pre-value and sucessor-value of a given key
+// For pre => we check if root.data < key ==> we store in result and move right to find greater then current value and less then given value
+// For successor => if root.data > key ==> we store and move left , if find element which is smaller then given value and greater then key value
+
+public static int PreValue(Node root,int key){
+        if(root==null) return -1;
+        int result=-1;
+        
+        while(root!=null){
+            if(root.data<key){
+                result=root.data;
+                root=root.right;
+            }else{
+                root=root.left;
+            }
+        }
+        
+        return result;
+        
+    }
+    public static int SucValue(Node root,int key){
+        if(root==null) return -1;
+        int result=-1;
+        
+        while(root!=null){
+            if(root.data>key)
+            {
+                result=root.data;
+                root=root.left;
+            }else{
+                root=root.right;
+            }
+        }
+        
+        return result;
+    }
