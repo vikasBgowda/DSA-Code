@@ -1,0 +1,31 @@
+// here first we check the inital cost with out changing the arrangement of the array
+// if the inital cost is less then or equal to k then we would return the intial cost without changing the arr and brr
+// now we sort both the arr and brr array
+// now we check the cost after sorting  the array with addition of K for the rearrangement of brr.
+// now we will return the min of initial sort or aftercost cost
+
+class Solution {
+    public long minCost(int[] arr, int[] brr, long k) {
+        int n=arr.length;
+        long initalCost=0;
+        
+        // Initial check the cost 
+        for(int i=0;i<n;i++){
+            initalCost+=Math.abs(arr[i]-brr[i]);
+        }
+
+        if(k>=initalCost){
+            return initalCost;
+        }
+        // sort both array
+        Arrays.sort(arr);
+        Arrays.sort(brr);
+
+        long AfterCost=0;
+        for(int i=0;i<n;i++){
+            AfterCost+=Math.abs(arr[i]-brr[i]);
+        }
+        AfterCost+=k;
+        return Math.min(initalCost,AfterCost);
+    }
+}
