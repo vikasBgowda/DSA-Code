@@ -1,0 +1,23 @@
+// To find inorder successor of an element in binary search tree.
+// if we find a root which is greater then the given key value then we would store the value and move left
+==> we store and move left because it might be an answer but we want the very next element so 
+--> we would go to left and seach of the element lesser then the current value and greater then the key value
+else
+    --> we move right
+
+class Solution {
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+    public int inorderSuccessor(Node root, Node x) {
+        // add code here.
+        int result=-1;
+        while(root!=null){
+            if(root.data>x.data){
+                result=root.data;
+                root=root.left;
+            }else{
+                root=root.right;
+            }
+        }
+        return result;
+    }
+}
