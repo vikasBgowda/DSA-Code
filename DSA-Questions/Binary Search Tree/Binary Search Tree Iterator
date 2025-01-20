@@ -1,0 +1,31 @@
+// we use stack to keep the track of all left elements first
+// since in order is left root right
+
+
+class BSTIterator {
+
+    Stack<TreeNode>st=new Stack<>();
+    public BSTIterator(TreeNode root) {
+        pushAll(root);
+    }
+    
+    public int next() {
+        if(st.isEmpty()){
+            return -1;
+        }else{
+            TreeNode curr=st.pop();
+            pushAll(curr.right);
+            return curr.val;
+        }
+    }
+    
+    public boolean hasNext() {
+        return st.isEmpty()?false:true;
+    }
+    public void pushAll(TreeNode root){
+        while(root!=null){
+            st.push(root);
+            root=root.left;
+        }
+    }
+}
