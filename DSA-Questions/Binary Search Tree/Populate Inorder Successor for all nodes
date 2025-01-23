@@ -1,0 +1,28 @@
+// we have two methods one is inorder and another is reverse of inorder
+
+class Solution {
+    Node next=null;
+    
+    public void populateNext(Node root) {
+        // code here
+        if(root==null) return ;
+        populateNext(root.left);
+        if(prev!=null){
+            prev.next=root;
+        }
+        prev=root;
+        populateNext(root.right);
+        
+        // ------------------------------
+        
+        if(root==null)
+        {
+            return ;
+        }
+        populateNext(root.right);
+        root.next=next;
+        next=root;
+        populateNext(root.left);
+        
+    }
+}
