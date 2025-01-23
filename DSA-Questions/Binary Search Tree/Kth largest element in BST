@@ -1,0 +1,29 @@
+// Here we are trying to find the kth largest element in the given tree
+1. we do reverse inorder travel => right root left
+2. we keep two variables to keep track of ans and counter 
+3. from right which is greater element we move k steps back to find kth element in the given tree.
+
+class Solution {
+    // return the Kth largest element in the given BST rooted at 'root'   
+    
+    public void findKthLarge(Node root,int k,int index[],int ans[]){
+        if(root==null || index[0]>k){
+            return ;
+        }
+        findKthLarge(root.right,k,index,ans);
+        index[0]=index[0]+1;
+        if(index[0]==k){
+            ans[0]=root.data;
+        }
+        findKthLarge(root.left,k,index,ans);
+    }
+    
+    public int kthLargest(Node root, int k) {
+        // Your code here
+        if(root==null) return -1;
+        int ans[]={-1};
+        int index[]={0};
+        findKthLarge(root,k,index,ans);
+        return ans[0];
+    }
+}
