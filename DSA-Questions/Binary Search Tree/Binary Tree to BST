@@ -1,0 +1,32 @@
+// 1. First we can do any traversal and store them in a array or priorityQueue
+// 2. Now sort if its a array
+// 3. Now again do inorder travel and change the data of the root to the data in the array/priorityQueue
+
+class Solution
+{
+    // The given root is the root of the Binary Tree
+    // Return the root of the generated BST
+    int index=0;
+    public void inorder(Node root,ArrayList<Integer>arr){
+        if(root==null) return ;
+        inorder(root.left,arr);
+        arr.add(root.data);
+        inorder(root.right,arr);
+    }
+    public void DataChange(Node root,ArrayList<Integer>arr){
+        if(root==null) return;
+        DataChange(root.left,arr);
+        root.data=arr.get(index++);
+        DataChange(root.right,arr);
+    }
+    Node binaryTreeToBST(Node root)
+    {
+       // Your code here
+       if(root==null) return null;
+       ArrayList<Integer>arr=new ArrayList<>();
+       inorder(root,arr);
+       Collections.sort(arr);
+       DataChange(root,arr);
+       return root;
+    }
+}
