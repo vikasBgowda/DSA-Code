@@ -1,0 +1,32 @@
+// We are making first half of the new linked list as even number and other half as odd number
+// we would take 2 pointer node which is even and odd and also 2 dummy nodes
+// atlast we would connect end of even to head of odd and end of odd to null
+
+--> we can do the changes accordingly like even - odd or odd - even
+
+class Solution {
+    Node divide(Node head) {
+        // code here
+        Node even=new Node(-1);
+        Node odd=new Node(-1);
+        Node Edummy=even;
+        Node Odummy=odd;
+        Node curr=head;
+        while(curr!=null){
+            if(curr.data%2==0){
+                //even
+                Edummy.next=curr;
+                Edummy=Edummy.next;
+                curr=curr.next;
+            }else{
+                //odd 
+                Odummy.next=curr;
+                Odummy=Odummy.next;
+                curr=curr.next;
+            }
+        }
+        Edummy.next=odd.next;
+        Odummy.next=null;
+        return even.next;
+    }
+}
