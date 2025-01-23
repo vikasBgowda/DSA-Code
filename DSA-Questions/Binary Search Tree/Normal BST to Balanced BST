@@ -1,0 +1,38 @@
+// Here we are trying to build Balanced BST from Normal BST
+1. We travel Inorder and store in array
+2. Then to create min Balanced BST we use binary search with the start and end range
+3. We take a mid element and create a Node then for left - range => start,mid-1 and right -> range => mid+1 , end
+
+class GfG
+{
+    void inOrder(Node root,ArrayList<Node>arr){
+        if(root==null) return ;
+
+        inOrder(root.left,arr);        
+        arr.add(root);
+        inOrder(root.right,arr);
+    }
+
+    Node BinaryConnect(ArrayList<Node>arr,int start,int end){
+        if(start>end){
+            return null;
+        }
+        int mid=(start+end)/2;
+        Node newNode=new Node(arr.get(mid).data);
+        newNode.left=BinaryConnect(arr,start,mid-1);
+        newNode.right=BinaryConnect(arr,mid+1,end);
+        return newNode;
+    }
+    Node buildBalancedTree(Node root) 
+    {
+        //Add your code here.
+        if(root==null) return root;
+        
+        ArrayList<Node>arr=new ArrayList<>();
+        inOrder(root,arr);
+        int n=arr.size();
+        // return connectTree(arr,Long.MIN_VALUE,Long.MAX_VALUE);
+        return BinaryConnect(arr,0,n-1);
+        
+    }
+}
