@@ -1,0 +1,38 @@
+// Here we are finding pairs in the DLL
+// In the first iteration we add all the elements to the list
+// now we again keep the two pointer start => head of the given DLL and end => end node of the given DLL
+// Condition is important because => start!=null && high!=null && start!=high && start.prev!=high 
+we ar echecking four things => start and end is not reaching null 
+                            => start is not equal is end since we need pairs 
+                            => start should be less than end
+
+class Solution {
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
+        // code here
+        ArrayList<ArrayList<Integer>>res=new ArrayList<>();
+        if(head==null) return res;
+
+        Node curr=head;
+        // iterating to the end node
+        while(curr.next!=null){
+            curr=curr.next;
+        }
+        
+        Node start=head;
+        Node high=curr;
+
+
+            while(start!=null && high!=null && start!=high && start.prev!=high ){
+                if(start.data+high.data==target){
+                    res.add(new ArrayList<>(List.of(start.data,high.data)));
+                    start=start.next;
+                    high=high.prev;
+                }else if((start.data+high.data>target)){
+                    high=high.prev;
+                }else{
+                    start=start.next;
+                }
+            }       
+        return res;
+    }
+}
