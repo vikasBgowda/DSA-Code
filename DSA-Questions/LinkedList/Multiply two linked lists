@@ -1,0 +1,24 @@
+  ------------------------
+  |                      |
+  |  sum= sum*10 + digit |
+  |                      |
+  ------------------------
+
+class Solution {
+    public long multiplyTwoLists(Node first, Node second) {
+        // Code here
+        long ans1=0,ans2=0,sum=0;
+        Node curr=first;
+        long MOD=1000000007;
+        while(curr!=null){
+            ans1=((ans1*10)+curr.data)%MOD ;  
+            curr=curr.next;
+        }
+        curr=second;
+        while(curr!=null){
+            ans2=((ans2*10)+curr.data)%MOD;
+            curr=curr.next;
+        }
+        return (ans1*ans2)%MOD;
+    }
+}
