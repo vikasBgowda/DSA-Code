@@ -1,0 +1,17 @@
+
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root==null) return root;
+
+        // we are swapping the link between left and right
+        TreeNode temp=root.left;
+        root.left=root.right;
+        root.right=temp;
+
+        // going down the tree and doing the link change
+        invertTree(root.left);
+        invertTree(root.right);
+
+        return root;
+    }
+}
