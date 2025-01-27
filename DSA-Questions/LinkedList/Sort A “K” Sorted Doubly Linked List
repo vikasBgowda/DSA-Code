@@ -1,0 +1,46 @@
+- Here it is given that all the elements are being dislocated k place from the original sorted order.
+- so instead of sorting everything which would take NlogN at min or we are using the K distance and doing it in NlogK
+
+- First we add the K+1 nodes in the PQ and now iterate till pq is not empty
+- First we check if its first time (To add newHead) else we do the connection
+
+- after checking and doing the connection we check if the curr ! = null
+     then => we add curr to pg and move curr to next
+
+- also at last we check if the last pointer should be pointing to null.
+
+public class Solution {
+
+	public static Node<Integer> sortedDll(Node<Integer> head, int k) {
+		if(head==null) return head;
+		PriorityQueue<Node<Integer>> pq = new PriorityQueue<>(
+            (a, b) -> Integer.compare(a.data, b.data)
+        );
+        Node curr=head;
+		for(int i=0;i<=k && curr!=null;i++){
+			pq.add(curr);
+			curr=curr.next;
+		}
+		Node newHead=null;
+		Node nextNode=null;
+        while(!pq.isEmpty()){
+			Node small=pq.remove();
+			if(newHead==null){
+				newHead=small;
+				nextNode=small;
+			}else{
+				nextNode.next=small;
+				small.prev=nextNode;
+				nextNode=small;
+			}
+
+			if(curr!=null){
+				pq.add(curr);
+				curr=curr.next;
+			}
+		}
+		if(nextNode!=null) nextNode.next=null;
+		return newHead;
+	}
+
+}
