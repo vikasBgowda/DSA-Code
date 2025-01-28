@@ -1,0 +1,28 @@
+For left or right view we can use 
+  - Level order travel along with it
+    1. for left if(i==0) we add in the result array || for right if(i==size-1) we add to the result array
+    2. we move Left Root Right for left and see if (level == res.size()) || for right we move Right Root Left and check if (level==size) then we add in the result array
+
+example for RIGHT VIEW
+
+    void FindRight(Node root,ArrayList<Integer>res,int level){
+        if(root==null) return ;
+        if(level==res.size()){
+            res.add(root.data);
+        }
+        FindRight(root.right,res,level+1);
+        FindRight(root.left,res,level+1);
+    }
+
+example for LEFT VIEW
+
+    void FindRight(Node root,ArrayList<Integer>res,int level){
+        if(root==null) return ;
+        if(level==res.size()){
+            res.add(root.data);
+        }
+---------------------------------------------
+        FindRight(root.left,res,level+1);  // just changes in the travel
+        FindRight(root.right,res,level+1);
+-----------------------------------------------
+    }
