@@ -1,0 +1,46 @@
+// we convert BT to DLL 
+// we have two methods in first one -
+                  - we travel inorder and when we react a node we create a new Node and do the link adjustment
+// in second
+  ==> we travel inorder but we don't use extra for creating a new node we use prev pointer for altering the link changes
+  prev -> prev pointer which we have visited.
+
+class Solution
+{
+    //Function to convert binary tree to doubly linked list and return it.
+    Node newhead=null , curr=null,prev=null;
+    void TreeToDLL(Node root){
+        if(root==null) return;
+        TreeToDLL(root.left);
+        Node newNode=new Node(root.data);
+        if(newhead==null){
+            newhead=newNode;
+            curr=newNode;
+        }else{
+            curr.right=newNode;
+            newNode.left=curr;
+            curr=curr.right;
+        }
+        TreeToDLL(root.right);
+    }
+    void ConstructTree(Node root){
+        if(root==null) return;
+        ConstructTree(root.left);
+        if(newhead==null){
+            newhead=root;
+        }else{
+            prev.right=root;
+            root.left=prev;
+        }
+        prev=root;
+        ConstructTree(root.right);
+    }
+    Node bToDLL(Node root)
+    {
+	//  Your code here	
+	if(root==null) return root;
+// 	TreeToDLL(root);
+    ConstructTree(root);
+	return newhead;
+    }
+}
