@@ -1,0 +1,64 @@
+// In this travel first we travel left , leaf and right nodes
+// if we check if the given root node is leaf then we add to array and return else we just add the root root and we travel
+// we call left with root.left || similarly we call right with root.right (we store in reverse order)
+// and for the left nodes we do inorder travel and check is the root is leaf then we add to array
+
+class Solution {
+    boolean isLeaf(Node root){
+        if(root.left==null && root.right==null){
+            return true;
+        }
+        return false;
+    }
+    void leftNodes(Node root,ArrayList<Integer>res){
+        if(root==null) return ;
+        while(root!=null){
+            if(isLeaf(root)!=true){
+                res.add(root.data);
+            }
+            if(root.left!=null){
+                root=root.left;
+            }else{
+                root=root.right;
+            }
+        }
+    }
+    void leafNodes(Node root,ArrayList<Integer>res){
+        if(root==null) return ;
+        leafNodes(root.left,res);
+        if(isLeaf(root)==true){
+            res.add(root.data);
+        }
+        leafNodes(root.right,res);
+    }
+    ArrayList<Integer> rightNodes(Node root){
+        ArrayList<Integer>rightNode=new ArrayList<>();
+        if(root==null) return rightNode;
+        while(root!=null){
+            if(isLeaf(root)!=true){
+                rightNode.add(0,root.data);
+            }
+            if(root.right!=null){
+                root=root.right;
+            }else{
+                root=root.left;
+            }
+        }
+        return rightNode;
+    }
+    ArrayList<Integer> boundaryTraversal(Node root) {
+        // code here
+        ArrayList<Integer>res=new ArrayList<>();
+        if(root==null) return res;
+        if(isLeaf(root)==true){
+            res.add(root.data);
+            return res;
+        }else{
+            res.add(root.data);
+        }
+        leftNodes(root.left,res);
+        leafNodes(root,res);
+        res.addAll(rightNodes(root.right));
+        return res;
+    }
+}
