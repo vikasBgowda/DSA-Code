@@ -1,0 +1,48 @@
+// Here we have 2 methods 
+1. we check height of the left and right tree of the current root ==> we keeo the boolean flag outside the function 
+  and for we node we find left and right height and see if ( left == right ) && flag 
+    ==> Then we return flag at the end
+2. Level order travel -> we use level order travel and for each level we check if there exist a leaf node and at last we check if we have got leaf node 
+    and queue is not empty then we return false else true
+
+class Solution {
+    boolean isleaf(Node root){
+        if(root.left==null && root.right==null) return true;
+        
+        return false;
+    }
+    boolean flag=true;
+    int height(Node root){
+        if(root==null)return 0;
+        int left=height(root.left);
+        int right=height(root.right);
+        
+        if(left!=0 && right!=0)
+        {
+            flag=(left==right) && flag;
+        }
+        return 1+Math.max(left,right);
+    }
+    boolean check(Node root) {
+        // Your code here
+        if(root==null) return true;
+
+        Queue<Node>queue=new LinkedList<>();
+        queue.add(root);
+        
+        while(!queue.isEmpty()){
+            boolean HasLeaf=false;
+            int size=queue.size();
+            for(int i=0;i<size;i++){
+                Node curr=queue.poll();
+                if(isleaf(curr)==true)HasLeaf=true;
+                if(curr.left!=null)queue.add(curr.left);
+                if(curr.right!=null)queue.add(curr.right);
+            }
+            if(HasLeaf==true && !queue.isEmpty()){
+                return false;
+            }
+        }
+        return true;
+    }
+}
