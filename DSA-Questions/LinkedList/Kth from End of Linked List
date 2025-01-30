@@ -1,0 +1,30 @@
+// Here we are trying to find the kth elements from the end 
+// so we use fast and slow pointer 
+// 1. first we travel fast pointer for k steps and check if at the end k ! =0 the new return -1 since k is greater than the size of the linklist 
+// 2. Now we travel both slow and fast pointer together one step each till fast reach end
+
+the idea is if we need to reach k th distance element from the end then we need to move x-k from the start
+so we move k th fast pointer first then we move the slow and fast together till fast reachs null
+
+class Solution {
+
+    // Function to find the data of kth node from
+    // the end of a linked list.
+    int getKthFromLast(Node head, int k) {
+        // Your code here
+        if(head==null) return -1;
+        Node fast=head;
+        Node slow=head;
+        while(fast!=null && k>0){
+            fast=fast.next;
+            k--;
+        }
+        if(k!=0) return -1;
+        
+        while(fast!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        return slow.data;
+    }
+}
