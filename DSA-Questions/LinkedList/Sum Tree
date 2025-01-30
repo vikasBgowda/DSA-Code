@@ -1,0 +1,21 @@
+we check if left sum and right sum of the node and return -1 if its not equal else return the value of left + right + rootdata
+
+class Solution {
+    int findSum(Node root){
+        if(root==null) return 0;
+        if(root.left==null && root.right==null) return root.data;
+        int left=findSum(root.left);
+        if(left==-1)return -1;
+        int right=findSum(root.right);
+        if(right==-1) return -1;
+        
+        if(left+right!=root.data) return -1;
+        return left+right+root.data;
+    }
+    boolean isSumTree(Node root) {
+        // Your code here
+        if(root==null) return true;
+        int ans=findSum(root);
+        return ans==-1?false:true;
+    }
+}
