@@ -1,0 +1,41 @@
+// Here have two methods to find number of nodes between the given range
+// first ==> we take any traversal like we have taken level order traversal now check if the node lies in the given range then we increament the count and return count at the end
+// second ==> we do kinda binary search 
+          - first we check if the given node lies between the given range then we return 1 + find(left) + find(right) we go again to left and right sub=trees to find the nodes
+          else if the node is greater then the Max of range then we go to left to find the answer else we travel left.
+
+class Solution {
+    // Function to count number of nodes in BST that lie in the given range.
+    int findRange(Node root,int l ,int h){
+        if(root==null) return 0;
+        if(root.data>=l && root.data<=h){
+            return findRange(root.left,l,h) + findRange(root.right,l,h)+1;
+        }else if(root.data>h){
+            return findRange(root.left,l,h);
+        }else{
+            return findRange(root.right,l,h);
+        }
+    }
+    
+    int getCount(Node root, int l, int h) {
+        // Your code here
+        if(root==null) return 0;
+        int count=0;
+        // Queue<Node>queue=new LinkedList<>();
+        // queue.add(root);
+        // while(!queue.isEmpty()){
+        //     Node currNode=queue.poll();
+        //     if(currNode.data>=l && currNode.data<=h){
+        //         count++;
+        //     }
+        //     if(currNode.left!=null){
+        //         queue.add(currNode.left);
+        //     }
+        //     if(currNode.right!=null){
+        //         queue.add(currNode.right);
+        //     }
+        // }
+        // return count;
+        return findRange(root,l,h);
+    }
+}
